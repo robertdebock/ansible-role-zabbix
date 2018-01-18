@@ -1,0 +1,44 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  # - name: zabbix-alpine-3.6
+  #   image: alpine:3.6
+  # - name: zabbix-alpine-3.7
+  #   image: alpine:3.7
+  # - name: zabbix-centos-6
+  #   image: centos:6
+  - name: zabbix-centos-7
+    image: centos:7
+  # - name: zabbix-debian-jessie
+  #   image: debian:jessie
+  # - name: zabbix-debian-buster
+  #   image: debian:buster
+  # - name: zabbix-fedora-26
+  #   image: fedora:26
+  # - name: zabbix-fedora-27
+  #   image: fedora:27
+  # - name: zabbix-opensuse-42.2
+  #   image: opensuse:42.2
+  # - name: zabbix-opensuse-42.3
+  #   image: opensuse:42.3
+  # - name: zabbix-ubuntu-zesty
+  #   image: ubuntu:zesty
+  # - name: zabbix-ubuntu-artful
+  #   image: ubuntu:artful
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: goss
+  lint:
+    name: 'None'

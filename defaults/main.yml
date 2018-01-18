@@ -1,0 +1,38 @@
+---
+# defaults file for zabbix
+# The "zabbix_version_major" are two numerical values, sparated by a period.
+zabbix_version_major: 3.4
+# The "zabbix_version" is the whole version of Zabbix.
+zabbix_version: "{{ zabbix_version_major }}.6-1"
+
+# Zabbix Agent settings.
+# "zabbix_agent" can be "present", "absent" or unset. (unset defaults to "present")
+zabbix_agent: present
+# Values used in the zabbix_agentd.conf template.
+zabbix_agent_server_address: 127.0.0.1
+zabbix_agent_listen_port: 10050
+zabbix_agent_server_active_address: 127.0.0.1
+
+# "zabbix_get" can be "present", "absent" or unset. (unset defaults to "absent")
+zabbix_get: absent
+
+# "zabbix_java_gateway" can be "present", "absent" or unset. (unset defaults to "absent")
+zabbix_java_gateway: absent
+
+# "zabbix_server" can be "present", "absent" or unset. (unset defaults to "absent")
+zabbix_server: absent
+# "zabbix_server_type" can be "mysql" "pgsql" or unset. (unset defaults to "mysql")
+zabbix_server_type: mysql
+
+# "zabbix_server" can be "present", "absent" or unset. (unset defaults to "absent")
+zabbix_sender: absent
+
+# "zabbix_proxy" can be "present", "absent" or unset. (unset defaults to "absent")
+zabbix_proxy: absent
+# "zabbix_proxy_type" can be "mysql" "pgsql" or unset. (unset defaults to "mysql")
+zabbix_proxy_type: mysql
+
+# "zabbix_proxy" can be "present", "absent" or unset. (unset defaults to "absent")
+zabbix_web: absent
+# "zabbix_web_type" can be "mysql" "pgsql" or unset. (unset defaults to "mysql")
+zabbix_web_type: mysql

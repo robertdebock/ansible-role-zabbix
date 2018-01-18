@@ -1,0 +1,88 @@
+---
+# tasks file for zabbix
+- name: install zabbix agent software
+  package:
+    name: "{{ item }}"
+    state: "{{ zabbix_agent | default('present') }}"
+  with_items:
+    - "{{ zabbix_packages[ansible_distribution]['agent'] }}"
+  when:
+    - zabbix_agent is defined
+
+- name: install zabbix get software
+  package:
+    name: "{{ item }}"
+    state: "{{ zabbix_get | default('absent') }}"
+  with_items:
+    - "{{ zabbix_packages[ansible_distribution]['get'] }}"
+  when:
+    - zabbix_get is defined
+
+- name: install zabbix java_gateway software
+  package:
+    name: "{{ item }}"
+    state: "{{ zabbix_java_gateway | default('absent') }}"
+  with_items:
+    - "{{ zabbix_packages[ansible_distribution]['java_gateway'] }}"
+  when:
+    - zabbix_java_gateway is defined
+
+- name: install zabbix server software
+  package:
+    name: "{{ item }}"
+    state: "{{ zabbix_server | default('absent') }}"
+  with_items:
+    - "{{ zabbix_packages[ansible_distribution]['server'] }}"
+  when:
+    - zabbix_server is defined
+
+- name: install zabbix sender software
+  package:
+    name: "{{ item }}"
+    state: "{{ zabbix_sender | default('absent') }}"
+  with_items:
+    - "{{ zabbix_packages[ansible_distribution]['sender'] }}"
+  when:
+    - zabbix_sender is defined
+
+- name: install zabbix proxy software
+  package:
+    name: "{{ item }}"
+    state: "{{ zabbix_proxy | default('absent') }}"
+  with_items:
+    - "{{ zabbix_packages[ansible_distribution]['proxy'] }}"
+  when:
+    - zabbix_proxy is defined
+
+- name: install zabbix web software
+  package:
+    name: "{{ item }}"
+    state: "{{ zabbix_web | default('absent') }}"
+  with_items:
+    - "{{ zabbix_packages[ansible_distribution]['web'] }}"
+  when:
+    - zabbix_web is defined
+
+- name: configuring zabbix agent
+  template:
+    src: templates/zabbix_agentd.conf.j2
+    dest: /etc/zabbix/zabbix_agentd.conf
+  notify:
+    - restart zabbix agent
+
+# - name: make configuration directory
+#   file:
+#     name: /etc/zabbix.d/
+#     state: directory
+#
+# - name: start and enable software
+#   service:
+#     name: "{{ item }}"
+#     state: started
+#     enabled: yes
+#   with_items:
+#     - "{{ zabbix_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+#       | default(zabbix_services[ansible_distribution]
+#       | default(zabbix_services['default'] )) }}"
+#   when:
+#     - ansible_virtualization_type != "docker"
