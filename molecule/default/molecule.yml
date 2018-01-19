@@ -12,8 +12,8 @@ platforms:
   #   image: alpine:3.6
   # - name: zabbix-alpine-3.7
   #   image: alpine:3.7
-  # - name: zabbix-centos-6
-  #   image: centos:6
+  - name: zabbix-centos-6
+    image: centos:6
   - name: zabbix-centos-7
     image: centos:7
   # - name: zabbix-debian-jessie
@@ -28,8 +28,8 @@ platforms:
   #   image: opensuse:42.2
   # - name: zabbix-opensuse-42.3
   #   image: opensuse:42.3
-  # - name: zabbix-ubuntu-zesty
-  #   image: ubuntu:zesty
+  # - name: zabbix-ubuntu-trusty
+  #   image: ubuntu:trusty
   # - name: zabbix-ubuntu-artful
   #   image: ubuntu:artful
 provisioner:

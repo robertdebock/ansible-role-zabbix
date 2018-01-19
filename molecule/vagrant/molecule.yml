@@ -10,8 +10,8 @@ driver:
 lint:
   name: yamllint
 platforms:
-  # - name: zabbix-centos-6
-  #   box: centos/6
+  - name: zabbix-centos-6
+    box: centos/6
   - name: zabbix-centos-7
     box: centos/7
   # - name: zabbix-debian-jessie64
@@ -26,8 +26,8 @@ platforms:
   #   box: opensuse/openSUSE-42.2-x86_64
   # - name: zabbix-ubuntu-trusty
   #   box: ubuntu/trusty64
-  # - name: zabbix-ubuntu-zesty
-  #   box: ubuntu/zesty64
+  # - name: zabbix-ubuntu-artful
+  #   box: ubuntu/artful64
 provisioner:
   name: ansible
   lint:
