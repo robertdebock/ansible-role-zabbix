@@ -52,7 +52,7 @@
 - name: place selinux type enforcement for zabbix server
   copy:
     src: files/my-zabbixserver.te
-    dst: /etc/zabbix/my-zabbixserver.te
+    dest: /etc/zabbix/my-zabbixserver.te
   notify:
     - create selinux mod
     - create selinux pp
