@@ -6,3 +6,19 @@
     state: restarted
   when:
     - ansible_virtualization_type != "docker"
+
+- name: restart zabbix server
+  service:
+    name: zabbix-server
+    state: restarted
+  when:
+    - ansible_virtualization_type != "docker"
+
+- name: create selinux mod
+  command: checkmodule -M -m -o /etc/zabbix/my-zabbixserver.mod /etc/zabbix/my-zabbixserver.te
+
+- name: create selinux pp
+  command: semodule_package -o /etc/zabbix/my-zabbixserver.pp -m /etc/zabbix/my-zabbixserver.mod
+
+- name: load selinux pp
+  command: semodule -i /etc/zabbix/my-zabbixserver.pp

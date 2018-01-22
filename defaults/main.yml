@@ -23,6 +23,11 @@ zabbix_java_gateway: absent
 zabbix_server: absent
 # "zabbix_server_type" can be "mysql" "pgsql" or unset. (unset defaults to "mysql")
 zabbix_server_type: mysql
+# The connection to MySQL or PostgreSQL must be specified.
+zabbix_server_database_host: localhost
+zabbix_server_database_name: zabbix
+zabbix_server_database_user: zabbix
+zabbix_server_database_pass: zabbix
 
 # "zabbix_server" can be "present", "absent" or unset. (unset defaults to "absent")
 zabbix_sender: absent
