@@ -1,14 +1,16 @@
 ---
 # vars file for zabbix
-zabbix_packages:
+zabbix_repository:
   CentOS:
-    agent: http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-agent-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.x86_64.rpm
-    get: http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-get-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.x86_64.rpm
-    java_gateway: http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-java-gateway-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.x86_64.rpm
-    server: http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-server-{{ zabbix_server_type | default('mysql') }}-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.x86_64.rpm
-    sender: http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-sender-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.x86_64.rpm
-    proxy: http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-proxy-{{ zabbix_proxy_type | default ('mysql') }}-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.x86_64.rpm
-    web: [ "http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-web-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.noarch.rpm", "http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-web-{{ zabbix_web_type | default('mysql') }}-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.noarch.rpm" ]
+    "6": http://repo.zabbix.com/zabbix/3.4/rhel/6/x86_64/zabbix-release-3.4-1.el6.noarch.rpm
+    "7": http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm
+  Debian:
+    "8": http://repo.zabbix.com/zabbix/3.4/debian/pool/main/z/zabbix-release/zabbix-release_3.4-1+jessie_all.deb
+    "buster/sid": http://repo.zabbix.com/zabbix/3.4/debian/pool/main/z/zabbix-release/zabbix-release_3.4-1+wheezy_all.deb
+  Ubuntu:
+    "14": http://repo.zabbix.com/zabbix/3.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.4-1+trusty_all.deb
+    "16": http://repo.zabbix.com/zabbix/3.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.4-1+xenial_all.deb
+
 zabbix_services:
   default:
     - zabbix
