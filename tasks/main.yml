@@ -106,7 +106,7 @@
   notify:
     - restart zabbix agent
   when:
-    - zabbix_agent is defined
+    - zabbix_agent == "present"
 
 - name: configure zabbix server
   template:
@@ -115,7 +115,7 @@
   notify:
     - restart zabbix server
   when:
-    - zabbix_server is defined
+    - zabbix_server == "present"
 
 # - name: start and enable software
 #   service:
