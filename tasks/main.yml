@@ -35,6 +35,8 @@
     - "{{ zabbix_packages[ansible_distribution]['server'] }}"
   when:
     - zabbix_server is defined
+  notify:
+    - import zabbix schema
 
 - name: selinux settings for zabbix_server
   seboolean:
@@ -44,10 +46,26 @@
   with_items:
     - httpd_can_connect_zabbix
     - httpd_can_network_connect_db
+    - zabbix_can_network
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
-    - zabbix_server is defined
+    - zabbix_server == "present"
+
+- name: install required selinux software
+  package:
+    name: "{{ item }}"
+  with_items:
+    - checkpolicy
+    - policycoreutils-python
+    - policycoreutils
+# These two packages have moved to "bootstrap_preview".
+    - MySQL-python
+    - mysql
+  when:
+    - ansible_selinux.status is defined
+    - ansible_selinux.status == "enabled"
+    - zabbix_server == "present"
 
 - name: place selinux type enforcement for zabbix server
   copy:
@@ -60,7 +78,10 @@
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
-    - zabbix_server is defined
+    - zabbix_server == "present"
+
+- name: flush handlers
+  meta: flush_handlers
 
 - name: install zabbix sender software
   package:
@@ -98,7 +119,7 @@
   when:
     - zabbix_agent is defined
 
-- name: configure zabbix zabbix server
+- name: configure zabbix server
   template:
     src: templates/zabbix_server.conf.j2
     dest: /etc/zabbix/zabbix_server.conf

@@ -22,3 +22,12 @@
 
 - name: load selinux pp
   command: semodule -i /etc/zabbix/my-zabbixserver.pp
+
+- name: import zabbix schema
+  mysql_db:
+    state: import
+    name: zabbix
+    target: /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-3.4.6/create.sql.gz
+    login_host: "{{ zabbix_server_database_host }}"
+    login_user: "{{ zabbix_server_database_user }}"
+    login_password: "{{ zabbix_server_database_pass }}"
