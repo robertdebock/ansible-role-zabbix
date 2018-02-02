@@ -11,6 +11,18 @@ zabbix_repository:
     "14": http://repo.zabbix.com/zabbix/3.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.4-1+trusty_all.deb
     "16": http://repo.zabbix.com/zabbix/3.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.4-1+xenial_all.deb
 
-zabbix_services:
+zabbix_agent_services:
   default:
-    - zabbix
+    - zabbix-agent
+
+zabbix_server_services:
+  default:
+    - zabbix-server
+
+zabbix_proxy_services:
+  default:
+    - zabbix-proxy
+
+zabbix_java_gateway_services:
+  default:
+    - zabbix-java-gateway

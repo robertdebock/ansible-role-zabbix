@@ -13,6 +13,27 @@
   when:
     - zabbix_agent is defined
 
+- name: configuring zabbix agent
+  template:
+    src: templates/zabbix_agentd.conf.j2
+    dest: /etc/zabbix/zabbix_agentd.conf
+  notify:
+    - restart zabbix agent
+  when:
+    - zabbix_agent == "present"
+
+- name: start and enable zabbix agent
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - "{{ zabbix_agent_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+      | default(zabbix_agent_services[ansible_distribution]
+      | default(zabbix_agent_services['default'] )) }}"
+  when:
+    - ansible_virtualization_type != "docker"
+
 - name: install zabbix-get software
   package:
     name: zabbix-get
@@ -26,6 +47,18 @@
     state: "{{ zabbix_java_gateway | default('absent') }}"
   when:
     - zabbix_java_gateway is defined
+
+- name: start and enable zabbix java-gateway
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - "{{ zabbix_java_gateway_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+      | default(zabbix_java_gateway_services[ansible_distribution]
+      | default(zabbix_java_gateway_services['default'] )) }}"
+  when:
+    - ansible_virtualization_type != "docker"
 
 - name: install zabbix-server software
   package:
@@ -75,8 +108,29 @@
     - ansible_selinux.status == "enabled"
     - zabbix_server == "present"
 
+- name: configure zabbix server
+  template:
+    src: templates/zabbix_server.conf.j2
+    dest: /etc/zabbix/zabbix_server.conf
+  notify:
+    - restart zabbix server
+  when:
+    - zabbix_server == "present"
+
 - name: flush handlers
   meta: flush_handlers
+
+- name: start and enable zabbix server
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - "{{ zabbix_server_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+      | default(zabbix_server_services[ansible_distribution]
+      | default(zabbix_server_services['default'] )) }}"
+  when:
+    - ansible_virtualization_type != "docker"
 
 - name: install zabbix-sender software
   package:
@@ -98,33 +152,3 @@
     state: "{{ zabbix_web | default('absent') }}"
   when:
     - zabbix_web is defined
-
-- name: configuring zabbix agent
-  template:
-    src: templates/zabbix_agentd.conf.j2
-    dest: /etc/zabbix/zabbix_agentd.conf
-  notify:
-    - restart zabbix agent
-  when:
-    - zabbix_agent == "present"
-
-- name: configure zabbix server
-  template:
-    src: templates/zabbix_server.conf.j2
-    dest: /etc/zabbix/zabbix_server.conf
-  notify:
-    - restart zabbix server
-  when:
-    - zabbix_server == "present"
-
-# - name: start and enable software
-#   service:
-#     name: "{{ item }}"
-#     state: started
-#     enabled: yes
-#   with_items:
-#     - "{{ zabbix_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-#       | default(zabbix_services[ansible_distribution]
-#       | default(zabbix_services['default'] )) }}"
-#   when:
-#     - ansible_virtualization_type != "docker"
