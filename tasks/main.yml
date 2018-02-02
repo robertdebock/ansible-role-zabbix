@@ -62,7 +62,7 @@
     - ansible_selinux.status == "enabled"
     - zabbix_server == "present"
 
-- name: place selinux type enforcement for zabbix server
+- name: place selinux type enforcement
   copy:
     src: files/my-zabbixserver.te
     dest: /etc/zabbix/my-zabbixserver.te
