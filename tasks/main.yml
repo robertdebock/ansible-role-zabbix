@@ -33,6 +33,7 @@
       | default(zabbix_agent_services['default'] )) }}"
   when:
     - ansible_virtualization_type != "docker"
+    - zabbix_agent == "present"
 
 - name: install zabbix-get software
   package:
@@ -48,7 +49,7 @@
   when:
     - zabbix_java_gateway is defined
 
-- name: start and enable zabbix java-gateway
+- name: start and enable zabbix-java-gateway
   service:
     name: "{{ item }}"
     state: started
@@ -59,6 +60,7 @@
       | default(zabbix_java_gateway_services['default'] )) }}"
   when:
     - ansible_virtualization_type != "docker"
+    - zabbix_java_gateway == "present"
 
 - name: install zabbix-server software
   package:
@@ -120,7 +122,7 @@
 - name: flush handlers
   meta: flush_handlers
 
-- name: start and enable zabbix server
+- name: start and enable zabbix-server
   service:
     name: "{{ item }}"
     state: started
@@ -131,6 +133,7 @@
       | default(zabbix_server_services['default'] )) }}"
   when:
     - ansible_virtualization_type != "docker"
+    - zabbix_server == "present"
 
 - name: install zabbix-sender software
   package:
@@ -145,6 +148,19 @@
     state: "{{ zabbix_proxy | default('absent') }}"
   when:
     - zabbix_proxy is defined
+
+- name: start and enable zabbix-proxy
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - "{{ zabbix_proxy_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+      | default(zabbix_proxy_services[ansible_distribution]
+      | default(zabbix_proxy_services['default'] )) }}"
+  when:
+    - ansible_virtualization_type != "docker"
+    - zabbix_proxy == "present"
 
 - name: install zabbix web software
   package:
