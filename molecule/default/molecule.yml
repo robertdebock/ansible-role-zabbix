@@ -14,8 +14,6 @@ platforms:
     image: centos:7
   - name: zabbix-debian-jessie
     image: debian:jessie
-  - name: zabbix-debian-sid
-    image: debian:sid
   - name: zabbix-debian-stretch
     image: debian:stretch
   - name: zabbix-debian-wheezy
