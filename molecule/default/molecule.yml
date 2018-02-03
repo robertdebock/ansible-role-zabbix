@@ -8,10 +8,50 @@ driver:
 lint:
   name: yamllint
 platforms:
+  - name: zabbix-archlinux
+    image: base/archlinux
+  - name: zabbix-alpine-3.6
+    image: alpine:3.6
+  - name: zabbix-alpine-3.7
+    image: alpine:3.7
   - name: zabbix-centos-6
     image: centos:6
   - name: zabbix-centos-7
     image: centos:7
+  - name: zabbix-debian-buster
+    image: debian:buster
+  - name: zabbix-debian-jessie
+    image: debian:jessie
+  - name: zabbix-debian-sid
+    image: debian:sid
+  - name: zabbix-debian-stretch
+    image: debian:stretch
+  - name: zabbix-debian-wheezy
+    image: debian:wheezy
+  - name: zabbix-fedora-23
+    image: fedora:23
+  - name: zabbix-fedora-24
+    image: fedora:24
+  - name: zabbix-fedora-25
+    image: fedora:25
+  - name: zabbix-fedora-26
+    image: fedora:26
+  - name: zabbix-fedora-27
+    image: fedora:27
+  - name: zabbix-opensuse-42.2
+    image: opensuse:42.2
+  - name: zabbix-opensuse-42.3
+    image: opensuse:42.3
+    # 14.04 LTS
+  - name: zabbix-ubuntu-trusty
+    image: ubuntu:trusty
+    # 16.04 LTS
+  - name: zabbix-ubuntu-xenial
+    image: ubuntu:xenial
+    # 17.04
+  - name: zabbix-ubuntu-artful
+    image: ubuntu:artful
+
 provisioner:
   name: ansible
   lint:
