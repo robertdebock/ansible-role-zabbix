@@ -1,10 +1,27 @@
 ---
 # tasks file for zabbix
-- name: install zabbix repository
+- name: install zabbix repository (dnf/yum)
   package:
     name: "{{ item }}"
   with_items:
     - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
+  when:
+    - ansible_pkg_mgr == "dnf" or ansible_pkg_mgr == "yum"
+
+- name: get zabbix repository (apt)
+  get_url:
+    url: "{{ item }}"
+    dest: /tmp
+  with_items:
+    - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
+
+- name: install zabbix repository (apt)
+  package:
+    name: "{{ item | basename }}"
+  with_items:
+    - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
+  when:
+    - ansible_pkg_mgr == "apt"
 
 - name: install zabbix-agent software
   package:
