@@ -17,7 +17,7 @@
 
 - name: install zabbix repository (apt)
   package:
-    name: "{{ item | basename }}"
+    name: "/tmp/{{ item | basename }}"
   with_items:
     - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
   when:
