@@ -23,6 +23,12 @@
   when:
     - ansible_pkg_mgr == "apt"
 
+- name: update cache (apt)
+  apt:
+    update_cache: yes
+  when:
+    - ansible_pkg_mgr == "apt"
+
 - name: install zabbix-agent software
   package:
     name: zabbix-agent
