@@ -192,3 +192,5 @@
     state: "{{ zabbix_web | default('absent') }}"
   when:
     - zabbix_web is defined
+  notify:
+    - restart httpd

@@ -27,3 +27,11 @@ zabbix_proxy_services:
 zabbix_java_gateway_services:
   default:
     - zabbix-java-gateway
+
+zabbix_httpd_services:
+  Debian:
+    - apache2
+  default:
+    - httpd
+  Ubuntu:
+    - apache2

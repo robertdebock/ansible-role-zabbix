@@ -31,3 +31,14 @@
     login_host: "{{ zabbix_server_database_host }}"
     login_user: "{{ zabbix_server_database_user }}"
     login_password: "{{ zabbix_server_database_pass }}"
+
+- name: restart httpd
+  service:
+    name: "{{ item }}"
+    state: restarted
+  when:
+    - ansible_virtualization_type != "docker"
+  with_items:
+    - "{{ zabbix_httpd_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+      | default(zabbix_httpd_services[ansible_distribution]
+      | default(zabbix_httpd_services['default'] )) }}"
