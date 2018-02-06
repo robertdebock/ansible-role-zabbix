@@ -134,6 +134,9 @@
     - ansible_selinux.status == "enabled"
     - zabbix_server == "present"
 
+- name: flush handlers
+  meta: flush_handlers
+
 - name: configure zabbix server
   template:
     src: templates/zabbix_server.conf.j2
@@ -142,9 +145,6 @@
     - restart zabbix server
   when:
     - zabbix_server == "present"
-
-- name: flush handlers
-  meta: flush_handlers
 
 - name: start and enable zabbix-server
   service:
