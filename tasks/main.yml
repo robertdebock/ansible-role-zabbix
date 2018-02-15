@@ -197,7 +197,7 @@
 
 - name: configure zabbix web
   template:
-    src: templates/zabbix_conf.php.j2
+    src: templates/zabbix.conf.php.j2
     dest: /etc/zabbix/web/zabbix_conf.php
   when:
     - zabbix_web == "present"
