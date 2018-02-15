@@ -44,4 +44,4 @@ zabbix_web_type: mysql
 # The Zabbix server to connect to.
 zabbix_web_server: localhost
 zabbix_web_server_port: 10051
-#zabbix_web_server_name: zabbix
+zabbix_web_server_name: zabbix
