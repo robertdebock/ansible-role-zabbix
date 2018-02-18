@@ -32,3 +32,11 @@ zabbix_httpd_service:
   Debian: apache2
   default: httpd
   Ubuntu: apache2
+
+zabbix_server_requirements:
+  Debian:
+    - python-mysqldb
+  CentOS:
+    - MySQL-python
+  Ubuntu:
+    - python-mysqldb

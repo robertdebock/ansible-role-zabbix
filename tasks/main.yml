@@ -86,6 +86,17 @@
     - ansible_virtualization_type != "docker"
     - zabbix_java_gateway == "present"
 
+- name: install zabbix-server requirements
+  package:
+    name: "{{ item }}"
+  when:
+    - zabbix_server is defined
+  with_items:
+    - "{{ zabbix_server_requirements[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+      | default(zabbix_server_requirements[ansible_distribution]
+      | default(zabbix_server_requirements['default'] )) }}"
+
+
 - name: install zabbix-server software
   package:
     name: "zabbix-server-{{ zabbix_server_type | default('mysql') }}"

@@ -2,8 +2,10 @@
 # defaults file for zabbix
 # The "zabbix_version_major" are two numerical values, sparated by a period.
 zabbix_version_major: 3.4
+
+zabbix_version_minor: 6
 # The "zabbix_version" is the whole version of Zabbix.
-zabbix_version: "{{ zabbix_version_major }}.6-1"
+zabbix_version: "{{ zabbix_version_major }}.{{ zabbix_version_minor }}-1"
 
 # Zabbix Agent settings.
 # "zabbix_agent" can be "present", "absent" or unset. (unset defaults to "present")
