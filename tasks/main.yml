@@ -192,8 +192,6 @@
     state: "{{ zabbix_web | default('absent') }}"
   when:
     - zabbix_web is defined
-  notify:
-    - restart httpd
 
 - name: configure zabbix web
   template:
@@ -201,3 +199,5 @@
     dest: /etc/zabbix/web/zabbix.conf.php
   when:
     - zabbix_web == "present"
+  notify:
+    - restart httpd
