@@ -90,7 +90,7 @@
   package:
     name: "{{ item }}"
   when:
-    - zabbix_server is defined
+    - zabbix_server == "present"
   with_items:
     - "{{ zabbix_server_requirements[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
       | default(zabbix_server_requirements[ansible_distribution]
