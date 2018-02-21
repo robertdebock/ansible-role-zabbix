@@ -96,7 +96,6 @@
       | default(zabbix_server_requirements[ansible_distribution]
       | default(zabbix_server_requirements['default'] )) }}"
 
-
 - name: install zabbix-server software
   package:
     name: "zabbix-server-{{ zabbix_server_type | default('mysql') }}"
