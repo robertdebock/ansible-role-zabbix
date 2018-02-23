@@ -22,7 +22,7 @@
 
 - name: load selinux pp
   command: semodule -i /etc/zabbix/my-zabbixserver.pp
-
+    
 - name: import zabbix schema
   mysql_db:
     state: import

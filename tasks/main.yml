@@ -138,6 +138,12 @@
   ignore_errors: yes
   when:
     - zabbix_server is defined
+
+- name: unarchive zabbix schema
+  unarchive:
+    src: /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql.gz
+    dest: /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql
+    remote_src: yes
   notify:
     - import zabbix schema
 
