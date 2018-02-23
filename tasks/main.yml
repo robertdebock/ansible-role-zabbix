@@ -143,7 +143,6 @@
   command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql.gz
   args:
     creates:
-    dest: /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql
   notify:
     - import zabbix schema
   when:
