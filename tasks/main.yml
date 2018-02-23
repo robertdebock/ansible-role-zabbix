@@ -142,12 +142,12 @@
 - name: unarchive zabbix schema
   unarchive:
     src: /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql.gz
-    dest: /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/
+    dest: /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}
     remote_src: yes
   notify:
     - import zabbix schema
   when:
-    - zabbix_server is defined
+    - zabbix_server == "present"
 
 - name: selinux settings for zabbix_server
   seboolean:
