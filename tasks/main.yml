@@ -3,6 +3,10 @@
 - name: install zabbix repository (dnf/yum)
   package:
     name: "{{ item }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   with_items:
     - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
   when:
@@ -12,12 +16,20 @@
   get_url:
     url: "{{ item }}"
     dest: /tmp
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   with_items:
     - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
 
 - name: install zabbix repository (apt)
   apt:
     deb: "/tmp/{{ item | basename }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   with_items:
     - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
   when:
@@ -26,6 +38,10 @@
 - name: update cache (apt)
   apt:
     update_cache: yes
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - ansible_pkg_mgr == "apt"
   changed_when: false
@@ -34,6 +50,10 @@
   package:
     name: zabbix-agent
     state: "{{ zabbix_agent | default('present') }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - zabbix_agent is defined
 
@@ -63,6 +83,10 @@
   package:
     name: zabbix-get
     state: "{{ zabbix_get | default('absent') }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - zabbix_get is defined
 
@@ -70,6 +94,10 @@
   package:
     name: zabbix-java-gateway
     state: "{{ zabbix_java_gateway | default('absent') }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - zabbix_java_gateway is defined
 
@@ -89,6 +117,10 @@
 - name: install zabbix-server requirements
   package:
     name: "{{ item }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - zabbix_server == "present"
   with_items:
@@ -100,6 +132,10 @@
   package:
     name: "zabbix-server-{{ zabbix_server_type | default('mysql') }}"
     state: "{{ zabbix_server | default('absent') }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - zabbix_server is defined
   notify:
@@ -122,6 +158,10 @@
 - name: install required selinux software
   package:
     name: "{{ item }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   with_items:
     - checkpolicy
     - policycoreutils-python
@@ -173,6 +213,10 @@
   package:
     name: zabbix-sender
     state: "{{ zabbix_sender | default('absent') }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - zabbix_sender is defined
 
@@ -180,6 +224,10 @@
   package:
     name: "zabbix-proxy-{{ zabbix_proxy_type | default('mysql') }}"
     state: "{{ zabbix_proxy | default('absent') }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - zabbix_proxy is defined
 
@@ -200,6 +248,10 @@
   package:
     name: "zabbix-web-{{ zabbix_web_type | default('mysql') }}"
     state: "{{ zabbix_web | default('absent') }}"
+  register: result
+  retries: 3
+  until: result|succeeded
+  ignore_errors: yes
   when:
     - zabbix_web is defined
 
