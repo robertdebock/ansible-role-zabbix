@@ -253,6 +253,12 @@
     - ansible_virtualization_type != "docker"
     - zabbix_proxy == "present"
 
+- name: import httpd role
+  include_role:
+    name: robertdebock.httpd
+  when:
+    - zabbix_web is defined
+
 - name: install zabbix web software
   package:
     name: "zabbix-web-{{ zabbix_web_type | default('mysql') }}"
