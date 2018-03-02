@@ -14,6 +14,20 @@ platforms:
     box: centos/6
   - name: zabbix-centos-7
     box: centos/7
+  - name: zabbix-debian-jessie64
+    box: debian/jessie64
+  - name: zabbix-debian-buster64
+    box: desc/buster64
+  - name: zabbix-fedora-26-cloud-base
+    box: fedora/26-cloud-base
+  - name: zabbix-fedora-27-cloud-base
+    box: fedora/27-cloud-base
+  - name: zabbix-opensuse-openSUSE-42-2-x86-64
+    box: opensuse/openSUSE-42.2-x86_64
+  - name: zabbix-ubuntu-trusty
+    box: ubuntu/trusty64
+  - name: zabbix-ubuntu-artful
+    box: ubuntu/artful64
 provisioner:
   name: ansible
   lint:
