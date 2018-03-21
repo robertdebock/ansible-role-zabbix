@@ -44,6 +44,7 @@ Example Playbook
 To install an agent to all `servers`:
 ```
 - hosts: servers
+  become: yes
 
   roles:
     - role: robertdebock.bootstrap
@@ -51,9 +52,47 @@ To install an agent to all `servers`:
     - role: robertdebock.zabbix
 ```
 
-To install a Zabbix web frontend:
+To install a Zabbix environment:
 ```
-- hosts: monitoringserver
+- hosts: databaseserver
+  become: yes
+
+  roles:
+    - robertdebock.bootstrap
+    - robertdebock.mysql
+
+    tasks:
+      - name: create database
+        mysql_db:
+          name: zabbix
+
+      - name: create user
+        mysql_user:
+          name: zabbix
+          password: zabbix
+          priv: '*.*:ALL'
+
+- hosts: zabbixserver
+  become: yes
+
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.epel
+    - role: robertdebock.zabbix
+      zabbix_server: present
+      zabbix_server_database_host: "{{ hostvars['databaseserver']['ansible_default_ipv4']['address'] }}"
+
+- hosts: all
+  become: yes
+
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.epel
+    - role: robertdebock.
+      zabbix_agent_server_address: ""{{ hostvars['zabbixserver']['ansible_default_ipv4']['address'] }}"
+
+
+- hosts: zabbixwebserver
 
   roles:
     - role: robertdebock.bootstrap
@@ -64,6 +103,7 @@ To install a Zabbix web frontend:
     - role: robertdebock.php
     - role: robertdebock.zabbix
       zabbix_web: present
+      zabbix_web_server: localhost
 ```
 
 Install this role using `galaxy install robertdebock.zabbix`.
