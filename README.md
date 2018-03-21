@@ -41,6 +41,7 @@ ansible-galaxy install --role-file requirements.yml
 Example Playbook
 ----------------
 
+To install an agent to all `servers`:
 ```
 - hosts: servers
 
@@ -48,6 +49,21 @@ Example Playbook
     - role: robertdebock.bootstrap
     - role: robertdebock.epel
     - role: robertdebock.zabbix
+```
+
+To install a Zabbix web frontend:
+```
+- hosts: monitoringserver
+
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.buildtools
+    - role: robertdebock.epel
+    - role: robertdebock.scl
+    - role: robertdebock.httpd
+    - role: robertdebock.php
+    - role: robertdebock.zabbix
+      zabbix_web: present
 ```
 
 Install this role using `galaxy install robertdebock.zabbix`.
