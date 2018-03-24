@@ -10,20 +10,6 @@ lint:
 platforms:
   - name: zabbix-centos-6
     image: centos:6
-  - name: zabbix-centos-7
-    image: centos:7
-  - name: zabbix-debian-jessie
-    image: debian:jessie
-  - name: zabbix-debian-stretch
-    image: debian:stretch
-  - name: zabbix-debian-wheezy
-    image: debian:wheezy
-    # 14.04 LTS
-  - name: zabbix-ubuntu-trusty
-    image: ubuntu:trusty
-    # 16.04 LTS
-  - name: zabbix-ubuntu-xenial
-    image: ubuntu:xenial
 provisioner:
   name: ansible
   lint:
