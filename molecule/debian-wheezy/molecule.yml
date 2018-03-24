@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: zabbix-centos-6
-    image: centos:6
+  - name: zabbix-debian-wheezy
+    image: debian:wheezy
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: centos-6
+  name: default
   test_sequence:
     - lint
     - destroy
