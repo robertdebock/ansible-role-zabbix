@@ -15,7 +15,7 @@ provisioner:
   lint:
     name: ansible-lint
 scenario:
-  name: default
+  name: debian-wheezy
   test_sequence:
     - lint
     - destroy
