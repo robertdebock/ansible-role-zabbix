@@ -6,7 +6,7 @@ zabbix
 Provides Zabbix for your system.
 
 Context
---------
+-------
 This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
 
 Here is an overview of related roles:
@@ -37,6 +37,19 @@ Download the dependencies by issuing this command:
 ```
 ansible-galaxy install --role-file requirements.yml
 ```
+
+Compatibility
+-------------
+
+This role has been tested against the following distributions and Ansible version:
+
+|distribution|ansible 2.3|ansible 2.4|ansible 2.5|
+|------------|-----------|-----------|-----------|
+|distro=centos-6|yes|yes|yes|
+|distro=centos-7|yes|yes|yes|
+|distro=debian-stretch|yes|yes|yes|
+|distro=ubuntu-trusty|yes|yes|yes|
+|distro=ubuntu-xenial|yes|yes|yes|
 
 Example Playbook
 ----------------
