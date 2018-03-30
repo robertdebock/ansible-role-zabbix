@@ -45,11 +45,11 @@ This role has been tested against the following distributions and Ansible versio
 
 |distribution|ansible 2.3|ansible 2.4|ansible 2.5|
 |------------|-----------|-----------|-----------|
-|distro=centos-6|yes|yes|yes|
-|distro=centos-7|yes|yes|yes|
-|distro=debian-stretch|yes|yes|yes|
-|distro=ubuntu-trusty|yes|yes|yes|
-|distro=ubuntu-xenial|yes|yes|yes|
+|centos-6|no|yes|yes|
+|centos-7|no|yes|yes|
+|debian-stretch|no|yes|yes|
+|ubuntu-trusty|no|yes|yes|
+|ubuntu-xenial|no|yes|yes|
 
 Example Playbook
 ----------------
