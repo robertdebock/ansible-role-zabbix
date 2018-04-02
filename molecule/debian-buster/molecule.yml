@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: zabbix-ubuntu-trusty
-    image: ubuntu:trusty
+  - name: zabbix-debian-buster
+    image: debian:buster
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: ubuntu-trusty
+  name: debian-buster
   test_sequence:
     - lint
     - destroy

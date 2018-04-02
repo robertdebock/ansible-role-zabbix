@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: zabbix-ubuntu-trusty
-    image: ubuntu:trusty
+  - name: zabbix-archlinux
+    image: base/archlinux
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: ubuntu-trusty
+  name: archlinux
   test_sequence:
     - lint
     - destroy

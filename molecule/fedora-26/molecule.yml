@@ -8,14 +8,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: zabbix-ubuntu-trusty
-    image: ubuntu:trusty
+  - name: zabbix-fedora-26
+    image: fedora:26
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: ubuntu-trusty
+  name: fedora-26
   test_sequence:
     - lint
     - destroy
