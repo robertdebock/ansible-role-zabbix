@@ -45,17 +45,17 @@ This role has been tested against the following distributions and Ansible versio
 
 |distribution|ansible 2.3|ansible 2.4|ansible 2.5|
 |------------|-----------|-----------|-----------|
-|alpine-3.6|no|no|no|
-|alpine-3.7|no|no|no|
-|archlinux|no|no|no|
+|alpine-3.6|yes|yes|yes|
+|alpine-3.7|yes|yes|yes|
+|archlinux|yes|yes|yes|
 |centos-6|no|yes|yes|
 |centos-7|no|yes|yes|
-|debian-wheezy|no|no|no|
-|debian-jessie|no|no|no|
-|debian-buster|no|no|no|
+|debian-wheezy|yes|yes|yes|
+|debian-jessie|yes|yes|yes|
+|debian-buster|yes|yes|yes|
 |debian-stretch|no|yes|yes|
-|fedora-26|no|no|no|
-|fedora-27|no|no|no|
+|fedora-26|yes|yes|yes|
+|fedora-27|yes|yes|yes|
 |opensuse-42.2|no|no|no|
 |opensuse-42.3|no|no|no|
 |ubuntu-artful|no|no|no|
