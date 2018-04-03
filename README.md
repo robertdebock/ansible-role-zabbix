@@ -58,7 +58,7 @@ This role has been tested against the following distributions and Ansible versio
 |fedora-27|yes|yes|yes|
 |opensuse-42.2|no|no|no|
 |opensuse-42.3|no|no|no|
-|ubuntu-artful|no|no|no|
+|ubuntu-artful|yes|yes|yes|
 |ubuntu-trusty|no|yes|yes|
 |ubuntu-xenial|no|yes|yes|
 
