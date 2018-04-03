@@ -5,7 +5,7 @@
     name: "{{ item }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   with_items:
     - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
@@ -18,7 +18,7 @@
     dest: /tmp
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   with_items:
     - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
@@ -30,7 +30,7 @@
     deb: "/tmp/{{ item | basename }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   with_items:
     - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
@@ -42,7 +42,7 @@
     update_cache: yes
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - ansible_pkg_mgr == "apt"
@@ -54,7 +54,7 @@
     state: "{{ zabbix_agent | default('present') }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - zabbix_agent is defined
@@ -87,7 +87,7 @@
     state: "{{ zabbix_get | default('absent') }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - zabbix_get is defined
@@ -98,7 +98,7 @@
     state: "{{ zabbix_java_gateway | default('absent') }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - zabbix_java_gateway is defined
@@ -121,7 +121,7 @@
     name: "{{ item }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - zabbix_server == "present"
@@ -136,7 +136,7 @@
     state: "{{ zabbix_server | default('absent') }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - zabbix_server is defined
@@ -169,7 +169,7 @@
     name: "{{ item }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   with_items:
     - checkpolicy
@@ -224,7 +224,7 @@
     state: "{{ zabbix_sender | default('absent') }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - zabbix_sender is defined
@@ -235,7 +235,7 @@
     state: "{{ zabbix_proxy | default('absent') }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - zabbix_proxy is defined
@@ -259,7 +259,7 @@
     state: "{{ zabbix_web | default('absent') }}"
   register: result
   retries: 3
-  until: result|succeeded
+  until: result is succeeded
   ignore_errors: yes
   when:
     - zabbix_web is defined
