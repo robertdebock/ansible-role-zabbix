@@ -18,10 +18,8 @@ platforms:
     image: debian:stretch
   - name: zabbix-debian-wheezy
     image: debian:wheezy
-    # 14.04 LTS
   - name: zabbix-ubuntu-trusty
     image: ubuntu:trusty
-    # 16.04 LTS
   - name: zabbix-ubuntu-xenial
     image: ubuntu:xenial
 provisioner:
@@ -39,7 +37,7 @@ scenario:
     - prepare
     - converge
     - idempotence
-#    - check
+    - check
     - side_effect
     - verify
     - destroy
