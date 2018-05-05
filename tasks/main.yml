@@ -172,7 +172,7 @@
 
 - name: place selinux type enforcement
   copy:
-    src: files/my-zabbixserver.te
+    src: my-zabbixserver.te
     dest: /etc/zabbix/my-zabbixserver.te
   notify:
     - create selinux mod
