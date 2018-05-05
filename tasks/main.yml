@@ -56,7 +56,7 @@
 
 - name: configuring zabbix agent
   template:
-    src: templates/zabbix_agentd.conf.j2
+    src: zabbix_agentd.conf.j2
     dest: /etc/zabbix/zabbix_agentd.conf
   notify:
     - restart zabbix agent
@@ -188,7 +188,7 @@
 
 - name: configure zabbix server
   template:
-    src: templates/zabbix_server.conf.j2
+    src: zabbix_server.conf.j2
     dest: /etc/zabbix/zabbix_server.conf
   notify:
     - restart zabbix server
@@ -253,7 +253,7 @@
 
 - name: configure zabbix web
   template:
-    src: templates/zabbix.conf.php.j2
+    src: zabbix.conf.php.j2
     dest: /etc/zabbix/web/zabbix.conf.php
   when:
     - zabbix_web == "present"
