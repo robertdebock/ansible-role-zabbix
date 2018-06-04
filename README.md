@@ -29,9 +29,9 @@ Dependencies
 
 Soft dependencies that prepare your system for Zabbix:
 
-- robertdebock.bootstrap
-- robertdebock.epel
-- robertdebock.httpd (For a Zabbix web frontend.)
+- [robertdebock.bootstrap](https://travis-ci.org/robertdebock/ansible-role-bootstrap)
+- [robertdebock.epel](https://travis-ci.org/robertdebock/ansible-role-epel)
+- [robertdebock.httpd](https://travis-ci.org/robertdebock/ansible-role-httpd) (For a Zabbix web frontend.)
 
 Download the dependencies by issuing this command:
 ```
