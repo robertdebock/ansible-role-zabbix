@@ -29,9 +29,9 @@ galaxy_info:
     - zabbix
     - installer
     - package
-    - CentOS
-    - Debian
-    - RHEL
-    - Ubuntu
+    - centos
+    - debian
+    - rhel
+    - ubuntu
 
 dependencies: []
