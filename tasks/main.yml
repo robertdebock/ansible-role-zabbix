@@ -1,36 +1,41 @@
 ---
 # tasks file for zabbix
+- name: load default variables
+  include_vars:
+    file: default.yml
+
+- name: load os-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - default.yml
+
 - name: install zabbix repository (dnf/yum)
   package:
-    name: "{{ item }}"
+    name: "{{ zabbix_repository }}"
   register: result
   retries: 3
   until: result is succeeded
-  with_items:
-    - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
   when:
     - ansible_pkg_mgr == "dnf" or ansible_pkg_mgr == "yum"
 
 - name: get zabbix repository (apt)
   get_url:
-    url: "{{ item }}"
+    url: "{{ zabbix_repository }}"
     dest: /tmp
   register: result
   retries: 3
   until: result is succeeded
-  with_items:
-    - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
   when:
     - ansible_pkg_mgr == "apt"
 
 - name: install zabbix repository (apt)
   apt:
-    deb: "/tmp/{{ item | basename }}"
+    deb: "/tmp/{{ zabbix_repository | basename }}"
   register: result
   retries: 3
   until: result is succeeded
-  with_items:
-    - "{{ zabbix_repository[ansible_distribution][ansible_distribution_major_version] }}"
   when:
     - ansible_pkg_mgr == "apt"
 
@@ -65,13 +70,9 @@
 
 - name: start and enable zabbix agent
   service:
-    name: "{{ item }}"
+    name: "{{ zabbix_agent_service }}"
     state: started
     enabled: yes
-  with_items:
-    - "{{ zabbix_agent_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-      | default(zabbix_agent_services[ansible_distribution]
-      | default(zabbix_agent_services['default'] )) }}"
   when:
     - ansible_virtualization_type != "docker"
     - zabbix_agent == "present"
@@ -98,13 +99,9 @@
 
 - name: start and enable zabbix-java-gateway
   service:
-    name: "{{ item }}"
+    name: "{{ zabbix_java_gateway_service }}"
     state: started
     enabled: yes
-  with_items:
-    - "{{ zabbix_java_gateway_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-      | default(zabbix_java_gateway_services[ansible_distribution]
-      | default(zabbix_java_gateway_services['default'] )) }}"
   when:
     - ansible_virtualization_type != "docker"
     - zabbix_java_gateway == "present"
@@ -118,9 +115,7 @@
   when:
     - zabbix_server == "present"
   with_items:
-    - "{{ zabbix_server_requirements[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-      | default(zabbix_server_requirements[ansible_distribution]
-      | default(zabbix_server_requirements['default'] )) }}"
+    - "{{ zabbix_server_requirements }}"
 
 - name: install zabbix-server software
   package:
@@ -197,13 +192,9 @@
 
 - name: start and enable zabbix-server
   service:
-    name: "{{ item }}"
+    name: "{{ zabbix_server_service }}"
     state: started
     enabled: yes
-  with_items:
-    - "{{ zabbix_server_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-      | default(zabbix_server_services[ansible_distribution]
-      | default(zabbix_server_services['default'] )) }}"
   when:
     - ansible_virtualization_type != "docker"
     - zabbix_server == "present"
@@ -230,13 +221,9 @@
 
 - name: start and enable zabbix-proxy
   service:
-    name: "{{ item }}"
+    name: "{{ zabbix_proxy_service }}"
     state: started
     enabled: yes
-  with_items:
-    - "{{ zabbix_proxy_services[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-      | default(zabbix_proxy_services[ansible_distribution]
-      | default(zabbix_proxy_services['default'] )) }}"
   when:
     - ansible_virtualization_type != "docker"
     - zabbix_proxy == "present"

@@ -1,0 +1,7 @@
+---
+# vars file for zabbix
+zabbix_repository:
+  Debian: "http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/debian/pool/main/z/zabbix-release/zabbix-release_{{ zabbix_version_major }}-1+wheezy_all.deb"
+
+zabbix_server_requirements:
+  - python-mysqldb
