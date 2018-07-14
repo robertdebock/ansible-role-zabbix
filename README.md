@@ -22,7 +22,21 @@ Apache HTTPD for a Zabbix web interface. (Hint: robertdebock.httpd)
 Role Variables
 --------------
 
-None known
+- zabbix_version_major: Part of the version of Zabbix.
+- zabbix_version_minor: Part of the version of Zabbix.
+- zabbix_version: Combined details to find the Zabbix version.
+- zabbix_agent: Zabbix agent present or absent.
+- zabbix_agent_server_address: IP address to listen on.
+- zabbix_agent_listen_port: TCP port to allow connections on.
+- zabbix_agent_server_active_address: IP address or hostname to get config from.
+- zabbix_get: Zabbix get present or absent.
+- zabbix_java_gateway: Zabbix java_gateway present or absent.
+- zabbix_server: Zabbix server present or absent.
+- zabbix_server_type: Type of database, mysql.
+- zabbix_server_database_host: Database connection details.
+- zabbix_server_database_name: Database connection details.
+- zabbix_server_database_user: Database connection details.
+- zabbix_server_database_pass: Database connection details.
 
 Dependencies
 ------------
