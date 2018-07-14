@@ -37,6 +37,15 @@ Role Variables
 - zabbix_server_database_name: Database connection details.
 - zabbix_server_database_user: Database connection details.
 - zabbix_server_database_pass: Database connection details.
+- zabbix_sender: Zabbix sender present or absent.
+- zabbix_proxy: Zabbix proxy present or absent.
+- zabbix_proxy_type: The type of proxy.
+- zabbix_web: Zabbix web present or absent.
+- zabbix_web_type: The type of web
+- zabbix_web_server: The hostname of the webserver.
+- zabbix_web_server_port: The port of the webserver.
+- zabbix_web_server_name: The name of the webserver.
+
 
 Dependencies
 ------------
