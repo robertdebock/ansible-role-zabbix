@@ -142,7 +142,6 @@ To install a Zabbix environment:
     - role: robertdebock.bootstrap
     - role: robertdebock.buildtools
     - role: robertdebock.epel
-    - role: robertdebock.scl
     - role: robertdebock.httpd
     - role: robertdebock.php
     - role: robertdebock.zabbix
