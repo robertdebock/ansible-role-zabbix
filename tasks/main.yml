@@ -38,16 +38,8 @@
   until: result is succeeded
   when:
     - ansible_pkg_mgr == "apt"
-
-- name: update cache (apt)
-  apt:
-    update_cache: yes
-  register: result
-  retries: 3
-  until: result is succeeded
-  when:
-    - ansible_pkg_mgr == "apt"
-  changed_when: no
+  notify:
+    - update cache (apt)
 
 - name: install zabbix-agent software
   package:

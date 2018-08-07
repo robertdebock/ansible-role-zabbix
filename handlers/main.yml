@@ -1,5 +1,12 @@
 ---
 # handlers file for zabbix
+- name: update cache (apt)
+  apt:
+    update_cache: yes
+  register: result
+  retries: 3
+  until: result is succeeded
+
 - name: restart zabbix agent
   service:
     name: zabbix-agent
