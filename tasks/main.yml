@@ -41,6 +41,11 @@
   notify:
     - update cache (apt)
 
+- name: create /etc/zabbix
+  file:
+    path: /etc/zabbix
+    state: directory
+
 - name: install zabbix-agent software
   package:
     name: zabbix-agent
