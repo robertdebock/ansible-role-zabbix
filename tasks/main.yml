@@ -41,6 +41,9 @@
   notify:
     - update cache (apt)
 
+- name: flush handlers:
+  meta: flush_handlers
+
 - name: create /etc/zabbix
   file:
     path: /etc/zabbix
