@@ -20,19 +20,9 @@
   when:
     - ansible_pkg_mgr == "dnf" or ansible_pkg_mgr == "yum"
 
-- name: get zabbix repository (apt)
-  get_url:
-    url: "{{ zabbix_repository }}"
-    dest: /tmp
-  register: result
-  retries: 3
-  until: result is succeeded
-  when:
-    - ansible_pkg_mgr == "apt"
-
 - name: install zabbix repository (apt)
   apt:
-    deb: "/tmp/{{ zabbix_repository | basename }}"
+    deb: "{{ zabbix_repository }}"
   register: result
   retries: 3
   until: result is succeeded
