@@ -14,6 +14,7 @@
 - name: install zabbix repository (dnf/yum)
   package:
     name: "{{ zabbix_repository }}"
+    state: present
   register: result
   retries: 3
   until: result is succeeded
@@ -33,6 +34,7 @@
 - name: install zabbix repository (apt)
   apt:
     deb: "/tmp/{{ zabbix_repository | basename }}"
+    state: present
   register: result
   retries: 3
   until: result is succeeded
@@ -109,6 +111,7 @@
 - name: install zabbix-server requirements
   package:
     name: "{{ item }}"
+    state: present
   register: result
   retries: 3
   until: result is succeeded
@@ -153,6 +156,7 @@
 - name: install required selinux software
   package:
     name: "{{ item }}"
+    state: present
   register: result
   retries: 3
   until: result is succeeded
