@@ -5,6 +5,17 @@ zabbix
 
 Provides Zabbix for your system.
 
+[Unit tests](https://travis-ci.org/robertdebock/ansible-role-zabbix) are done on every commit and periodically.
+
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-zabbix/issues)
+
+To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
+```
+pip install molecule
+molecule test
+```
+There are many scenarios available, please have a look in the `molecule/` directory.
+
 Context
 -------
 This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
@@ -75,6 +86,7 @@ This role has been tested against the following distributions and Ansible versio
 |centos-latest|yes|yes|yes|
 |debian-latest|yes|yes|yes|
 |debian-stable|yes|yes|yes|
+|debian-unstable|no|no|no|
 |fedora-latest|no|no|no|
 |fedora-rawhide|no|no|no|
 |opensuse-leap|no|no|no|

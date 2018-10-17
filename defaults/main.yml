@@ -1,7 +1,7 @@
 ---
 # defaults file for zabbix
 # The "zabbix_version_major" are two numerical values, sparated by a period.
-zabbix_version_major: 3.5
+zabbix_version_major: 4.0
 
 zabbix_version_minor: 1
 # The "zabbix_version" is the whole version of Zabbix.
@@ -47,3 +47,6 @@ zabbix_web_type: mysql
 zabbix_web_server: localhost
 zabbix_web_server_port: 10051
 zabbix_web_server_name: zabbix
+
+# To update all packages installed by this roles, set `zabbix_package_state` to `latest`.
+zabbix_package_state: present

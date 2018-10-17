@@ -1,20 +1,11 @@
 ---
 # tasks file for zabbix
-- name: load default variables
-  include_vars:
-    file: default.yml
-
-- name: load os-specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-    - "{{ ansible_distribution }}.yml"
-    - default.yml
-
 - name: install zabbix repository (dnf/yum)
   package:
-    name: "{{ zabbix_repository }}"
-    state: present
+    name: "{{ zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+          | default(zabbix_repository[ansible_distribution]
+          | default(zabbix_repository['default'])) }}"
+    state: "{{ zabbix_package_state }}"
   register: result
   retries: 3
   until: result is succeeded
@@ -23,7 +14,8 @@
 
 - name: get zabbix repository (apt)
   get_url:
-    url: "{{ zabbix_repository }}"
+    url: "{{ zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+          | default(zabbix_repository[ansible_distribution]) }}"
     dest: /tmp
   register: result
   retries: 3
@@ -33,7 +25,8 @@
 
 - name: install zabbix repository (apt)
   apt:
-    deb: "/tmp/{{ zabbix_repository | basename }}"
+    deb: "/tmp/{{ zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+          | default(zabbix_repository[ansible_distribution]) | basename }}"
     state: present
   register: result
   retries: 3
@@ -110,15 +103,14 @@
 
 - name: install zabbix-server requirements
   package:
-    name: "{{ item }}"
+    name: "{{ zabbix_server_requirements[ansible_distribution]
+          | default(zabbix_server_requirments['default']) }}"
     state: present
   register: result
   retries: 3
   until: result is succeeded
   when:
     - zabbix_server == "present"
-  with_items:
-    - "{{ zabbix_server_requirements }}"
 
 - name: install zabbix-server software
   package:

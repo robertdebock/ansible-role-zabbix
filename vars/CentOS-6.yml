@@ -1,6 +1,0 @@
----
-# vars file for zabbix
-zabbix_repository: "http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/rhel/6/x86_64/zabbix-release-{{ zabbix_version_major }}-{{ zabbix_version_minor }}.el6.noarch.rpm"
-
-zabbix_server_requirements:
-  - MySQL-python

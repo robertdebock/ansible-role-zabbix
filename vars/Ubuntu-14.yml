@@ -1,7 +1,0 @@
----
-# vars file for zabbix
-zabbix_repository: "http://repo.zabbix.com/zabbix/{{ zabbix_version_major }}/ubuntu/pool/main/z/zabbix-release/zabbix-release_{{ zabbix_version_major }}-{{ zabbix_version_minor }}+trusty_all.deb"
-
-zabbix_server_requirements:
-  Ubuntu:
-    - python-mysqldb
