@@ -123,9 +123,9 @@
     - zabbix_server is defined
 
 - name: unarchive zabbix schema
-  command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql.gz
+  command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql.gz
   args:
-    creates: /usr/share/doc/zabbix-server-{{ zabbix_server_type}}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql
+    creates: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql
   notify:
     - import zabbix schema
   when:
