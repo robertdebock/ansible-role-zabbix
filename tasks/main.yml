@@ -12,22 +12,9 @@
   when:
     - ansible_pkg_mgr == "dnf" or ansible_pkg_mgr == "yum"
 
-- name: get zabbix repository (apt)
-  get_url:
-    url: "{{ zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-          | default(zabbix_repository[ansible_distribution]) }}"
-    dest: /tmp
-  register: result
-  retries: 3
-  until: result is succeeded
-  when:
-    - ansible_pkg_mgr == "apt"
-
 - name: install zabbix repository (apt)
   apt:
-    deb: "/tmp/{{ zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-          | default(zabbix_repository[ansible_distribution]) | basename }}"
-    state: present
+    deb: "{{ zabbix_repository }}"
   register: result
   retries: 3
   until: result is succeeded
