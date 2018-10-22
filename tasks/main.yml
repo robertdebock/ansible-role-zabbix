@@ -14,7 +14,9 @@
 
 - name: install zabbix repository (apt)
   apt:
-    deb: "{{ zabbix_repository }}"
+    deb: "{{ zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
+         | default(zabbix_repository[ansible_distribution]
+         | default(zabbix_repository['default'])) }}"
   register: result
   retries: 3
   until: result is succeeded
