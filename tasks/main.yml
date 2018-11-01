@@ -2,9 +2,7 @@
 # tasks file for zabbix
 - name: install zabbix repository (dnf/yum)
   package:
-    name: "{{ zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-          | default(zabbix_repository[ansible_distribution]
-          | default(zabbix_repository['default'])) }}"
+    name: "{{ zabbix_repository }}"
     state: "{{ zabbix_package_state }}"
   register: result
   retries: 3
@@ -14,9 +12,7 @@
 
 - name: install zabbix repository (apt)
   apt:
-    deb: "{{ zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version]
-         | default(zabbix_repository[ansible_distribution]
-         | default(zabbix_repository['default'])) }}"
+    deb: "{{ zabbix_repository }}"
   register: result
   retries: 3
   until: result is succeeded
@@ -92,8 +88,7 @@
 
 - name: install zabbix-server requirements
   package:
-    name: "{{ zabbix_server_requirements[ansible_distribution]
-          | default(zabbix_server_requirments['default']) }}"
+    name: "{{ zabbix_server_requirements }}"
     state: present
   register: result
   retries: 3
@@ -112,9 +107,9 @@
     - zabbix_server is defined
 
 - name: unarchive zabbix schema
-  command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql.gz
+  command: "{{ zabbix_unarchive_command }}"
   args:
-    creates: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql
+    creates: "{{ zabbix_unarchive_creates }}"
   notify:
     - import zabbix schema
   when:

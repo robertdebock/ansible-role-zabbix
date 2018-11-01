@@ -1,5 +1,6 @@
 ---
 # defaults file for zabbix
+
 # The "zabbix_version_major" are two numerical values, sparated by a period.
 zabbix_version_major: 4.0
 
