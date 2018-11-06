@@ -3,17 +3,7 @@ zabbix
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-zabbix.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-zabbix)
 
-Provides Zabbix for your system.
-
-You can configure to role to install:
-- zabbix-agent
-- zabbix-get
-- zabbix-java_gateway
-- zabbix-server
-- zabbix-sender
-- zabbix-proxy
-- zabbix-web
-
+The purpose of this role is to install and configure Zabbix on your system.
 
 Example Playbook
 ----------------
