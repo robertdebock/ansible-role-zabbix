@@ -12,8 +12,8 @@ lint:
 platforms:
   - name: zabbix-debian
     box: debian/stretch64
-  - name: zabbix-fedora
-    box: fedora/28-cloud-base
+  - name: zabbix-centos
+    box: centos/7
 provisioner:
   name: ansible
   lint:
