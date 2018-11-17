@@ -38,6 +38,8 @@ platforms:
     image: ubuntu:artful
   - name: zabbix-ubuntu-devel
     image: ubuntu:devel
+  - name: zabbix-ubuntu-latest
+    image: ubuntu:latest
 provisioner:
   name: ansible
   lint:
