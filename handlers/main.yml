@@ -12,14 +12,14 @@
     name: zabbix-agent
     state: restarted
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
 
 - name: restart zabbix server
   service:
     name: zabbix-server
     state: restarted
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
 
 - name: create selinux mod
   command: checkmodule -M -m -o /etc/zabbix/my-zabbixserver.mod /etc/zabbix/my-zabbixserver.te
@@ -44,4 +44,4 @@
     name: "{{ zabbix_httpd_service }}"
     state: restarted
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker

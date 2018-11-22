@@ -54,7 +54,7 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
     - zabbix_agent == "present"
 
 - name: install zabbix-get software
@@ -83,7 +83,7 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
     - zabbix_java_gateway == "present"
 
 - name: install zabbix-server requirements
@@ -176,7 +176,7 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
     - zabbix_server == "present"
 
 - name: install zabbix-sender software
@@ -205,7 +205,7 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
     - zabbix_proxy == "present"
 
 - name: install zabbix web software
