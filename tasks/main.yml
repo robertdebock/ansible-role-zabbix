@@ -4,18 +4,18 @@
   package:
     name: "{{ zabbix_repository }}"
     state: "{{ zabbix_package_state }}"
-  register: result
+  register: zabbix_install_zabbix_repository_dnf_yum
   retries: 3
-  until: result is succeeded
+  until: zabbix_install_zabbix_repository_dnf_yum is succeeded
   when:
     - ansible_pkg_mgr == "dnf" or ansible_pkg_mgr == "yum"
 
 - name: install zabbix repository (apt)
   apt:
     deb: "{{ zabbix_repository }}"
-  register: result
+  register: zabbix_zabbix_repository_apt
   retries: 3
-  until: result is succeeded
+  until: zabbix_zabbix_repository_apt is succeeded
   when:
     - ansible_pkg_mgr == "apt"
   notify:
@@ -33,9 +33,9 @@
   package:
     name: zabbix-agent
     state: "{{ zabbix_agent | default('present') }}"
-  register: result
+  register: zabbix_install_zabbix_agent_software
   retries: 3
-  until: result is succeeded
+  until: zabbix_install_zabbix_agent_software is succeeded
   when:
     - zabbix_agent is defined
 
@@ -61,9 +61,9 @@
   package:
     name: zabbix-get
     state: "{{ zabbix_get | default('absent') }}"
-  register: result
+  register: zabbix_install_zabbix_get_software
   retries: 3
-  until: result is succeeded
+  until: zabbix_install_zabbix_get_software is succeeded
   when:
     - zabbix_get is defined
 
@@ -71,9 +71,9 @@
   package:
     name: zabbix-java-gateway
     state: "{{ zabbix_java_gateway | default('absent') }}"
-  register: result
+  register: zabbix_install_zabix_java_gateway_software
   retries: 3
-  until: result is succeeded
+  until: zabbix_install_zabix_java_gateway_software is succeeded
   when:
     - zabbix_java_gateway is defined
 
@@ -90,9 +90,9 @@
   package:
     name: "{{ zabbix_server_requirements }}"
     state: present
-  register: result
+  register: zabbix_install_zabbix_server_requirements
   retries: 3
-  until: result is succeeded
+  until: zabbix_install_zabbix_server_requirements is succeeded
   when:
     - zabbix_server == "present"
 
@@ -100,9 +100,9 @@
   package:
     name: "zabbix-server-{{ zabbix_server_type | default('mysql') }}"
     state: "{{ zabbix_server | default('absent') }}"
-  register: result
+  register: zabbix_install_zabbix_server_software
   retries: 3
-  until: result is succeeded
+  until: zabbix_install_zabbix_server_software is succeeded
   when:
     - zabbix_server is defined
 
@@ -133,7 +133,7 @@
   package:
     name: "{{ item }}"
     state: present
-  register: result
+  register: zabbix_install_required_selinux_software
   retries: 3
   until: result is succeeded
   with_items:
