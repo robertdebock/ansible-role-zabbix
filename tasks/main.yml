@@ -129,22 +129,6 @@
     - ansible_selinux.status == "enabled"
     - zabbix_server == "present"
 
-- name: install required selinux software
-  package:
-    name: "{{ item }}"
-    state: present
-  register: zabbix_install_required_selinux_software
-  retries: 3
-  until: result is succeeded
-  with_items:
-    - checkpolicy
-    - policycoreutils-python
-    - policycoreutils
-  when:
-    - ansible_selinux.status is defined
-    - ansible_selinux.status == "enabled"
-    - zabbix_server == "present"
-
 - name: place selinux type enforcement
   copy:
     src: my-zabbixserver.te
