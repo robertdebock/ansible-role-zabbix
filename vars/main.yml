@@ -1,5 +1,7 @@
 ---
 # vars file for zabbix
+zabbix_server_mysql_version: "{{ zabbix_version_major }}.2"
+
 zabbix_agent_service: zabbix-agent
 
 zabbix_server_service: zabbix-server
@@ -30,7 +32,7 @@ _zabbix_server_requirements:
 
 zabbix_server_requirements: "{{ _zabbix_server_requirements[ansible_distribution] | default(_zabbix_server_requirements['default']) }}"
 
-zabbix_unarchive_command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql.gz
-zabbix_unarchive_creates: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql
+zabbix_unarchive_command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}/create.sql.gz
+zabbix_unarchive_creates: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}/create.sql
 
 zabbix_mysql_target: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql
