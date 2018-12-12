@@ -28,7 +28,7 @@ _zabbix_server_requirements:
   Ubuntu:
     - python-mysqldb
 
-zabbix_server_requirements: "{{ _zabbix_server_requirements[ansible_distribution] | default(_zabbix_server_requirments['default']) }}"
+zabbix_server_requirements: "{{ _zabbix_server_requirements[ansible_distribution] | default(_zabbix_server_requirements['default']) }}"
 
 zabbix_unarchive_command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql.gz
 zabbix_unarchive_creates: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.{{ zabbix_version_minor }}/create.sql
