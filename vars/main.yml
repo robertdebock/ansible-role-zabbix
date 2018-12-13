@@ -28,7 +28,7 @@ _zabbix_server_requirements:
   CentOS-6:
     - MySQL-python
     - mysql
-  CentOS-7
+  CentOS-7:
     - mariadb
     - MySQL-python
   Debian:
