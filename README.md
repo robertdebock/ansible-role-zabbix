@@ -16,6 +16,8 @@ This example is taken from `molecule/default/playbook.yml`:
   gather_facts: false
 
   vars:
+    mysql_ignore_docker: no
+    httpd_ignore_docker: no
     mysql_databases:
       - name: zabbix
     mysql_users:
@@ -133,6 +135,7 @@ The following roles can be installed to ensure all requirements are met, using `
 ---
 - robertdebock.bootstrap
 - robertdebock.epel
+- robertdebock.mysql
 - robertdebock.php
 - robertdebock.python_pip
 - robertdebock.httpd

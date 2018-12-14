@@ -4,6 +4,8 @@
   gather_facts: false
 
   vars:
+    mysql_ignore_docker: no
+    httpd_ignore_docker: no
     mysql_databases:
       - name: zabbix
     mysql_users:
