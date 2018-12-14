@@ -15,9 +15,23 @@ This example is taken from `molecule/default/playbook.yml`:
   hosts: all
   gather_facts: false
 
+  vars:
+    mysql_databases:
+      - name: zabbix
+    mysql_users:
+      - name: zabbix
+        password: zabbix
+        priv: "zabbix.*:ALL"
+    zabbix_server: present
+    zabbix_web: present
+
   roles:
     - robertdebock.bootstrap
     - robertdebock.epel
+    - robertdebock.python_pip
+    - robertdebock.php
+    - robertdebock.mysql
+    - robertdebock.httpd
     - robertdebock.zabbix
 
 ```
@@ -78,6 +92,26 @@ zabbix_web_server: localhost
 zabbix_web_server_port: 10051
 zabbix_web_server_name: zabbix
 
+# You can provision Zabbix groups.
+# Most options map directly to the documentation:
+# https://docs.ansible.com/ansible/latest/modules/zabbix_group_module.html
+zabbix_web_groups:
+  - name: Linux servers
+
+# Add hosts to Zabbix.
+# Most options map directly to the documentation:
+# https://docs.ansible.com/ansible/latest/modules/zabbix_host_module.html
+zabbix_web_hosts:
+  - name: Example server 1
+    interface_ip: 192.168.127.127
+    interface_dns: server1.example.com
+    visible_name: Example server 1 name
+    description: Example server 1 description
+    groups:
+      - Linux servers
+    link_templates:
+      - Template OS Linux
+
 # To update all packages installed by this roles, set `zabbix_package_state` to `latest`.
 zabbix_package_state: present
 
@@ -99,6 +133,9 @@ The following roles can be installed to ensure all requirements are met, using `
 ---
 - robertdebock.bootstrap
 - robertdebock.epel
+- robertdebock.php
+- robertdebock.python_pip
+- robertdebock.httpd
 
 
 Context

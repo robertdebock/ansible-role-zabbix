@@ -1,3 +1,6 @@
 ---
 - robertdebock.bootstrap
 - robertdebock.epel
+- robertdebock.php
+- robertdebock.python_pip
+- robertdebock.httpd
