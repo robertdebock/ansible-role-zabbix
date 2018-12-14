@@ -210,3 +210,39 @@
     - zabbix_web == "present"
   notify:
     - restart httpd
+
+- name: add zabbix groups
+  local_action:
+    module: zabbix_group
+    server_url: "{{ zabbix_web_server }}"
+    login_user: admin
+    login_password: zabbix
+    state: present
+    host_groups:
+      - "{{ item.name }}"
+  with_items:
+    - "{{ zabbix_web_groups }}"
+
+- name: add zabbix hosts
+  local_action:
+    module: zabbix_host
+    server_url: "{{ zabbix_web_server }}"
+    login_user: admin
+    login_password: zabbix
+    host_name: "{{ item.name }}"
+    visible_name: "{{ item.visible_name | default([omit]) }}"
+    description: "{{ item.description | default([omit]) }}"
+    host_groups:
+      - "{{ item.groups }}"
+    link_templates:
+      - "{{ item.link_templates }}"
+    status: enabled
+    state: present
+    inventory_mode: manual
+    interfaces:
+      - type: 1
+        main: 1
+        useip: 1
+        ip: "{{ item.interface_ip }}"
+        dns: "{{ item.interface_dns }} | default([omit]) }}"
+        port: 10050
