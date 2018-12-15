@@ -38,7 +38,7 @@ _zabbix_documentation_directory:
   Ubuntu: "/usr/share/doc/zabbix-server-{{ zabbix_server_type }}"
 
 zabbix_documentation_directory: "{{ _zabbix_documentation_directory[ansible_distribution] }}"
-  
+
 zabbix_unarchive_command: gunzip {{ zabbix_documentation_directory }}/create.sql.gz
 zabbix_unarchive_creates: "{{ zabbix_documentation_directory }}/create.sql"
 
