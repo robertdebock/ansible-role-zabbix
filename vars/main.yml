@@ -22,23 +22,8 @@ _zabbix_repository:
 
 zabbix_repository: "{{ _zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_zabbix_repository[ansible_distribution] | default(_zabbix_repository['default'])) }}"
 
-_zabbix_server_requirements:
-  default:
-    - mariadb
-  CentOS-6:
-    - MySQL-python
-    - mysql
-  CentOS-7:
-    - mariadb
-    - MySQL-python
-  Debian:
-    - mariadb
-    - python-mysqldb
-  Ubuntu:
-    - mariadb
-    - python-mysqldb
-
-zabbix_server_requirements: "{{ _zabbix_server_requirements[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_zabbix_server_requirements[ansible_distribution] | default(_zabbix_server_requirements['default'])) }}"
+# Get the list of required software from the mysql role.
+zabbix_server_requirements: "{{ mysql_packages }}"
 
 zabbix_unarchive_command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}/create.sql.gz
 zabbix_unarchive_creates: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}/create.sql
