@@ -1,5 +1,12 @@
 ---
 # tasks file for zabbix
+- name: test variables and environment
+  assert:
+    that:
+      - ansible_distribution == "CentOS" or
+        ansible_distribution == "Debian" or
+        ansible_distribution == "Ubuntu"
+
 - name: install zabbix repository (dnf/yum)
   package:
     name: "{{ zabbix_repository }}"
@@ -194,7 +201,7 @@
 
 - name: install zabbix web software
   package:
-    name: "zabbix-web-{{ zabbix_web_type | default('mysql') }}"
+    name: "{{ zabbix_web_server_package }}"
     state: "{{ zabbix_web | default('absent') }}"
   register: result
   retries: 3
@@ -211,24 +218,37 @@
   notify:
     - restart httpd
 
+- name: install zabbix-api requirements
+  pip:
+    name: zabbix-api
+    state: "{{ zabbix_package_state }}"
+  register: zabbix_install_zabbix_api_requirements
+  retries: 3
+  until: zabbix_install_zabbix_api_requirements is succeeded
+  when:
+    - zabbix_web_groups is defined or
+      zabbix_web_hosts is defined
+
 - name: add zabbix groups
   local_action:
     module: zabbix_group
     server_url: "{{ zabbix_web_server }}"
-    login_user: admin
-    login_password: zabbix
+    login_user: "{{ zabbix_web_username }}"
+    login_password: "{{ zabbix_web_password }}"
     state: present
     host_groups:
       - "{{ item.name }}"
   with_items:
     - "{{ zabbix_web_groups }}"
+  when:
+    - zabbix_web_groups is defined
 
 - name: add zabbix hosts
   local_action:
     module: zabbix_host
     server_url: "{{ zabbix_web_server }}"
-    login_user: admin
-    login_password: zabbix
+    login_user: "{{ zabbix_web_username }}"
+    login_password: "{{ zabbix_web_password }}"
     host_name: "{{ item.name }}"
     visible_name: "{{ item.visible_name | default([omit]) }}"
     description: "{{ item.description | default([omit]) }}"
@@ -246,3 +266,5 @@
         ip: "{{ item.interface_ip }}"
         dns: "{{ item.interface_dns }} | default([omit]) }}"
         port: 10050
+  when:
+    - zabbix_web_groups is defined

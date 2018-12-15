@@ -22,10 +22,24 @@ _zabbix_repository:
 
 zabbix_repository: "{{ _zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_zabbix_repository[ansible_distribution] | default(_zabbix_repository['default'])) }}"
 
+_zabbix_web_server_package:
+  CentOS: zabbix-web-{{ zabbix_web_type | default('mysql') }}
+  Debian: zabbix-frontend-php
+  Ubuntu: zabbix-frontend-php
+
+zabbix_web_server_package: "{{ _zabbix_web_server_package[ansible_distribution] }}"
+
 # Get the list of required software from the mysql role.
 zabbix_server_requirements: "{{ mysql_packages }}"
 
-zabbix_unarchive_command: gunzip /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}/create.sql.gz
-zabbix_unarchive_creates: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}/create.sql
+_zabbix_documentation_directory:
+  CentOS: "/usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}"
+  Debian: "/usr/share/doc/zabbix-server-{{ zabbix_server_type }}"
+  Ubuntu: "/usr/share/doc/zabbix-server-{{ zabbix_server_type }}"
+
+zabbix_documentation_directory: "{{ _zabbix_documentation_directory[ansible_distribution] }}"
+  
+zabbix_unarchive_command: gunzip {{ zabbix_documentation_directory }}/create.sql.gz
+zabbix_unarchive_creates: "{{ zabbix_documentation_directory }}/create.sql"
 
 zabbix_mysql_target: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.2/create.sql
