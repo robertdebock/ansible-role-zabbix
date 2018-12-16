@@ -242,6 +242,7 @@
     - "{{ zabbix_web_groups }}"
   when:
     - zabbix_web_groups is defined
+    - issue_49976 is not defined
 
 - name: add zabbix hosts
   local_action:
@@ -268,3 +269,4 @@
         port: 10050
   when:
     - zabbix_web_groups is defined
+    - issue_49976 is not defined

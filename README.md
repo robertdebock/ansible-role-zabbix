@@ -94,6 +94,8 @@ zabbix_web_server: localhost
 zabbix_web_server_port: 10051
 zabbix_web_server_name: zabbix
 
+zabbix_web_username: zabbix
+zabbix_web_password: zabbix
 # You can provision Zabbix groups.
 # Most options map directly to the documentation:
 # https://docs.ansible.com/ansible/latest/modules/zabbix_group_module.html
@@ -121,6 +123,8 @@ zabbix_package_state: present
 # to some locations in /etc. The role skips tasks that will typically fail in
 # Docker. With this parameter you can tell the role to -not- skip these tasks.
 zabbix_ignore_docker: yes
+
+issue_49976: not updated
 
 ```
 

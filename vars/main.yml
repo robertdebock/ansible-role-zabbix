@@ -42,4 +42,4 @@ zabbix_documentation_directory: "{{ _zabbix_documentation_directory[ansible_dist
 zabbix_unarchive_command: gunzip {{ zabbix_documentation_directory }}/create.sql.gz
 zabbix_unarchive_creates: "{{ zabbix_documentation_directory }}/create.sql"
 
-zabbix_mysql_target: /usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_version_major }}.2/create.sql
+zabbix_mysql_target: "{{ zabbix_documentation_directory }}/create.sql"

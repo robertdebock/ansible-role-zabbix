@@ -78,3 +78,5 @@ zabbix_package_state: present
 # to some locations in /etc. The role skips tasks that will typically fail in
 # Docker. With this parameter you can tell the role to -not- skip these tasks.
 zabbix_ignore_docker: yes
+
+issue_49976: not updated
