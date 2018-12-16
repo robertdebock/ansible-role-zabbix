@@ -44,7 +44,7 @@
   retries: 3
   until: zabbix_install_zabbix_agent_software is succeeded
   when:
-    - zabbix_agent is "present"
+    - zabbix_agent == "present"
 
 - name: configuring zabbix agent
   template:
@@ -111,7 +111,7 @@
   retries: 3
   until: zabbix_install_zabbix_server_software is succeeded
   when:
-    - zabbix_server is "present"
+    - zabbix_server == "present"
 
 - name: unarchive zabbix schema
   command: "{{ zabbix_unarchive_command }}"
@@ -121,6 +121,7 @@
     - import zabbix schema
   when:
     - zabbix_server == "present"
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
 
 - name: selinux settings for zabbix_server
   seboolean:
