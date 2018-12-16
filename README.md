@@ -89,6 +89,7 @@ zabbix_proxy_type: mysql
 zabbix_web: absent
 # "zabbix_web_type" can be "mysql" "pgsql" or unset. (unset defaults to "mysql")
 zabbix_web_type: mysql
+
 # The Zabbix server to connect to.
 zabbix_web_server: localhost
 zabbix_web_server_port: 10051
@@ -96,6 +97,7 @@ zabbix_web_server_name: zabbix
 
 zabbix_web_username: zabbix
 zabbix_web_password: zabbix
+
 # You can provision Zabbix groups.
 # Most options map directly to the documentation:
 # https://docs.ansible.com/ansible/latest/modules/zabbix_group_module.html

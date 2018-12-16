@@ -44,7 +44,7 @@
   retries: 3
   until: zabbix_install_zabbix_agent_software is succeeded
   when:
-    - zabbix_agent is defined
+    - zabbix_agent is "present"
 
 - name: configuring zabbix agent
   template:
@@ -72,7 +72,7 @@
   retries: 3
   until: zabbix_install_zabbix_get_software is succeeded
   when:
-    - zabbix_get is defined
+    - zabbix_get == "present"
 
 - name: install zabbix-java-gateway software
   package:
@@ -82,7 +82,7 @@
   retries: 3
   until: zabbix_install_zabix_java_gateway_software is succeeded
   when:
-    - zabbix_java_gateway is defined
+    - zabbix_java_gateway == "present"
 
 - name: start and enable zabbix-java-gateway
   service:
@@ -111,7 +111,7 @@
   retries: 3
   until: zabbix_install_zabbix_server_software is succeeded
   when:
-    - zabbix_server is defined
+    - zabbix_server is "present"
 
 - name: unarchive zabbix schema
   command: "{{ zabbix_unarchive_command }}"
@@ -178,7 +178,7 @@
   retries: 3
   until: result is succeeded
   when:
-    - zabbix_sender is defined
+    - zabbix_sender == "present"
 
 - name: install zabbix-proxy software
   package:
@@ -188,7 +188,7 @@
   retries: 3
   until: result is succeeded
   when:
-    - zabbix_proxy is defined
+    - zabbix_proxy == "present"
 
 - name: start and enable zabbix-proxy
   service:
@@ -207,7 +207,7 @@
   retries: 3
   until: result is succeeded
   when:
-    - zabbix_web is defined
+    - zabbix_web == "present"
 
 - name: configure zabbix web
   template:

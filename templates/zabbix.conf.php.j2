@@ -5,7 +5,7 @@ global $DB;
 
 $DB['TYPE']     = 'MYSQL';
 $DB['SERVER']   = '{{ zabbix_server_database_host }}';
-$DB['PORT']     = '0';
+$DB['PORT']     = '{{ zabbix_server_database_port | default('3306') }}';
 $DB['DATABASE'] = '{{ zabbix_server_database_name }}';
 $DB['USER']     = '{{ zabbix_server_database_user }}';
 $DB['PASSWORD'] = '{{ zabbix_server_database_pass }}';
