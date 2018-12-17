@@ -231,8 +231,7 @@
       zabbix_web_hosts is defined
 
 - name: add zabbix groups
-  local_action:
-    module: zabbix_group
+  zabbix_group:
     server_url: "{{ zabbix_web_server }}"
     login_user: "{{ zabbix_web_username }}"
     login_password: "{{ zabbix_web_password }}"
@@ -241,18 +240,18 @@
       - "{{ item.name }}"
   with_items:
     - "{{ zabbix_web_groups }}"
+  delegate_to: localhost
   when:
     - zabbix_web_groups is defined
     - issue_49976 is not defined
 
 - name: add zabbix hosts
-  local_action:
-    module: zabbix_host
+  zabbix_host:
     server_url: "{{ zabbix_web_server }}"
     login_user: "{{ zabbix_web_username }}"
     login_password: "{{ zabbix_web_password }}"
     host_name: "{{ item.name }}"
-    visible_name: "{{ item.visible_name | default([omit]) }}"
+    visible_name: "{{ item.visible_name | default(item.name) }}"
     description: "{{ item.description | default([omit]) }}"
     host_groups:
       - "{{ item.groups }}"
@@ -265,9 +264,12 @@
       - type: 1
         main: 1
         useip: 1
-        ip: "{{ item.interface_ip }}"
+        ip: "{{ item.interface_ip | default([omit]) }}"
         dns: "{{ item.interface_dns }} | default([omit]) }}"
         port: 10050
+  with_items:
+    - "{{ zabbix_web_hosts }}"
+  delegate_to: localhost
   when:
     - zabbix_web_groups is defined
     - issue_49976 is not defined
