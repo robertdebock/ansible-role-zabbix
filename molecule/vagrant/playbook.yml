@@ -13,6 +13,8 @@
       - name: zabbix
         password: zabbix
         priv: "zabbix.*:ALL"
+        encoding: utf8
+        collation: utf8_bin
     zabbix_server: present
     zabbix_web: present
 

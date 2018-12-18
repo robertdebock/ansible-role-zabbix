@@ -47,7 +47,7 @@ zabbix_web: absent
 zabbix_web_type: mysql
 
 # The Zabbix server to connect to.
-zabbix_web_server: localhost
+zabbix_web_server: "https://localhost/zabbix"
 zabbix_web_server_port: 10051
 zabbix_web_server_name: zabbix
 
@@ -81,5 +81,3 @@ zabbix_package_state: present
 # to some locations in /etc. The role skips tasks that will typically fail in
 # Docker. With this parameter you can tell the role to -not- skip these tasks.
 zabbix_ignore_docker: yes
-
-issue_49976: not updated

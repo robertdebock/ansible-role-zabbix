@@ -229,6 +229,7 @@
   when:
     - zabbix_web_groups is defined or
       zabbix_web_hosts is defined
+    - zabbix_web == "present"
 
 - name: add zabbix groups
   zabbix_group:
@@ -240,10 +241,10 @@
       - "{{ item.name }}"
   with_items:
     - "{{ zabbix_web_groups }}"
-  delegate_to: localhost
   when:
     - zabbix_web_groups is defined
-    - issue_49976 is not defined
+    - zabbix_web == "present"
+  run_once: yes
 
 - name: add zabbix hosts
   zabbix_host:
@@ -269,7 +270,7 @@
         port: 10050
   with_items:
     - "{{ zabbix_web_hosts }}"
-  delegate_to: localhost
   when:
     - zabbix_web_groups is defined
-    - issue_49976 is not defined
+    - zabbix_web == "present"
+  run_once: yes
