@@ -244,7 +244,7 @@
   when:
     - zabbix_web_groups is defined
     - zabbix_web == "present"
-    - ansible_virtualization_type != "yocker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
   run_once: yes
 
 - name: add zabbix hosts
@@ -274,5 +274,5 @@
   when:
     - zabbix_web_groups is defined
     - zabbix_web == "present"
-    - ansible_virtualization_type != "yocker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
   run_once: yes
