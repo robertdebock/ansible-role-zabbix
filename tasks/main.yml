@@ -209,6 +209,8 @@
   until: result is succeeded
   when:
     - zabbix_web == "present"
+  notify:
+    - restart httpd
 
 - name: configure zabbix web
   template:
