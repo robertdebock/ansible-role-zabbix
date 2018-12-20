@@ -221,6 +221,9 @@
   notify:
     - restart httpd
 
+- name: flush handlers
+  meta: flush_handlers
+
 - name: install zabbix-api requirements
   pip:
     name: zabbix-api
