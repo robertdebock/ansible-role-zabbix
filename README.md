@@ -73,6 +73,7 @@ zabbix_server: absent
 zabbix_server_type: mysql
 # The connection to MySQL or PostgreSQL must be specified.
 zabbix_server_database_host: localhost
+zabbix_server_database_port: 3306
 zabbix_server_database_name: zabbix
 zabbix_server_database_user: zabbix
 zabbix_server_database_pass: zabbix
@@ -91,12 +92,13 @@ zabbix_web: absent
 zabbix_web_type: mysql
 
 # The Zabbix server to connect to.
-zabbix_web_server: localhost
+zabbix_web_server: "https://localhost/zabbix"
 zabbix_web_server_port: 10051
 zabbix_web_server_name: zabbix
 
-zabbix_web_username: zabbix
+zabbix_web_username: admin
 zabbix_web_password: zabbix
+zabbix_validate_certs: no
 
 # You can provision Zabbix groups.
 # Most options map directly to the documentation:
@@ -126,7 +128,8 @@ zabbix_package_state: present
 # Docker. With this parameter you can tell the role to -not- skip these tasks.
 zabbix_ignore_docker: yes
 
-issue_49976: not updated
+# Get the list of required software from the mysql role.
+zabbix_server_requirements: "{{ mysql_packages }}"
 
 ```
 
@@ -163,10 +166,10 @@ This role has been tested against the following distributions and Ansible versio
 
 |distribution|ansible 2.6|ansible 2.7|ansible devel|
 |------------|-----------|-----------|-------------|
-|alpine-edge*|yes|yes|yes*|
-|alpine-latest|yes|yes|yes*|
-|archlinux|yes|yes|yes*|
-|centos-6|yes|yes|yes*|
+|alpine-edge*|no|no|no*|
+|alpine-latest|no|no|no*|
+|archlinux|no|no|no*|
+|centos-6|no|no|no*|
 |centos-latest|yes|yes|yes*|
 |debian-latest|yes|yes|yes*|
 |debian-stable|yes|yes|yes*|
