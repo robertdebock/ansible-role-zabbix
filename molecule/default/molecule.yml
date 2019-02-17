@@ -34,8 +34,10 @@ platforms:
     image: opensuse:leap
   - name: zabbix-opensuse-tumbleweed
     image: opensuse:tumbleweed
-  - name: zabbix-ubuntu-artful
-    image: ubuntu:artful
+  - name: zabbix-ubuntu-latest
+    image: ubuntu:latest
+  - name: zabbix-ubuntu-rolling
+    image: ubuntu:rolling
   - name: zabbix-ubuntu-devel
     image: ubuntu:devel
   - name: zabbix-ubuntu-latest
