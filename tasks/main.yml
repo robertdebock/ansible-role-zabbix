@@ -10,7 +10,7 @@
 - name: install zabbix repository (dnf/yum)
   package:
     name: "{{ zabbix_repository }}"
-    state: "{{ zabbix_package_state }}"
+    state: present
   register: zabbix_install_zabbix_repository_dnf_yum
   retries: 3
   until: zabbix_install_zabbix_repository_dnf_yum is succeeded
@@ -61,7 +61,7 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker"
     - zabbix_agent == "present"
 
 - name: install zabbix-get software
@@ -90,7 +90,7 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker"
     - zabbix_java_gateway == "present"
 
 - name: install zabbix-server requirements
@@ -121,7 +121,7 @@
     - import zabbix schema
   when:
     - zabbix_server == "present"
-    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker"
 
 - name: selinux settings for zabbix_server
   seboolean:
@@ -168,7 +168,7 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker"
     - zabbix_server == "present"
 
 - name: install zabbix-sender software
@@ -197,7 +197,7 @@
     state: started
     enabled: yes
   when:
-    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker"
     - zabbix_proxy == "present"
 
 - name: install zabbix web software
@@ -227,7 +227,7 @@
 - name: install zabbix-api requirements
   pip:
     name: zabbix-api
-    state: "{{ zabbix_package_state }}"
+    state: present
   register: zabbix_install_zabbix_api_requirements
   retries: 3
   until: zabbix_install_zabbix_api_requirements is succeeded
@@ -250,7 +250,7 @@
   when:
     - zabbix_web_groups is defined
     - zabbix_web == "present"
-    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker"
   run_once: yes
 
 - name: add zabbix hosts
@@ -281,5 +281,5 @@
   when:
     - zabbix_web_groups is defined
     - zabbix_web == "present"
-    - ansible_virtualization_type != "docker" or zabbix_ignore_docker
+    - ansible_virtualization_type != "docker"
   run_once: yes
