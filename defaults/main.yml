@@ -75,7 +75,5 @@ zabbix_web_hosts:
     link_templates:
       - Template OS Linux
 
-
-
 # Get the list of required software from the mysql role.
 zabbix_server_requirements: "{{ mysql_packages }}"
