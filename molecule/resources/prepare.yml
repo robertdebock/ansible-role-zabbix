@@ -1,19 +1,18 @@
 ---
 - name: Prepare
   hosts: all
+  become: yes
   gather_facts: no
 
   vars:
-    mysql_ignore_docker: no
-    httpd_ignore_docker: no
     mysql_databases:
       - name: zabbix
+        encoding: utf8
+        collation: utf8_bin
     mysql_users:
       - name: zabbix
         password: zabbix
         priv: "zabbix.*:ALL"
-    zabbix_server: present
-    zabbix_web: present
 
   roles:
     - robertdebock.bootstrap

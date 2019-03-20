@@ -40,3 +40,6 @@ zabbix_unarchive_command: gunzip {{ zabbix_documentation_directory }}/create.sql
 zabbix_unarchive_creates: "{{ zabbix_documentation_directory }}/create.sql"
 
 zabbix_mysql_target: "{{ zabbix_documentation_directory }}/create.sql"
+
+# Get the list of required software from the mysql role.
+zabbix_server_requirements: "{{ mysql_packages }}"

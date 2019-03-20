@@ -51,7 +51,7 @@ zabbix_web_server: "https://localhost/zabbix"
 zabbix_web_server_port: 10051
 zabbix_web_server_name: zabbix
 
-zabbix_web_username: admin
+zabbix_web_username: Admin
 zabbix_web_password: zabbix
 zabbix_validate_certs: no
 
@@ -74,6 +74,3 @@ zabbix_web_hosts:
       - Linux servers
     link_templates:
       - Template OS Linux
-
-# Get the list of required software from the mysql role.
-zabbix_server_requirements: "{{ mysql_packages }}"

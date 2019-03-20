@@ -4,5 +4,11 @@
   become: yes
   gather_facts: yes
 
+  vars:
+    zabbix_server: present
+    zabbix_web: present
+
   roles:
+    - ansible-role-httpd
+    - ansible-role-mysql
     - ansible-role-zabbix

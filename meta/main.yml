@@ -30,4 +30,6 @@ galaxy_info:
     - rhel
     - ubuntu
 
-dependencies: []
+dependencies:
+  - robertdebock.httpd
+  - robertdebock.mysql
