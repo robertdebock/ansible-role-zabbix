@@ -9,6 +9,6 @@
     zabbix_web: present
 
   roles:
-    - ansible-role-httpd
-    - ansible-role-mysql
+    - robertdebock.httpd
+    - robertdebock.mysql
     - ansible-role-zabbix
