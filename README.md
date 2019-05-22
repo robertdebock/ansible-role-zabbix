@@ -8,7 +8,7 @@ Install and configure Zabbix on your system.
 Example Playbook
 ----------------
 
-This example is taken from `molecule/default/playbook.yml`:
+This example is taken from `molecule/resources/playbook.yml`:
 ```yaml
 ---
 - name: Converge
@@ -16,28 +16,33 @@ This example is taken from `molecule/default/playbook.yml`:
   become: yes
   gather_facts: yes
 
+  vars:
+    zabbix_server: present
+    zabbix_web: present
+
   roles:
+    - robertdebock.httpd
+    - robertdebock.mysql
     - robertdebock.zabbix
 ```
 
-The machine you are running this on, may need to be prepared. Tests have been done on machines prepared by this playbook:
+The machine you are running this on, may need to be prepared.
 ```yaml
 ---
 - name: Prepare
   hosts: all
+  become: yes
   gather_facts: no
 
   vars:
-    mysql_ignore_docker: no
-    httpd_ignore_docker: no
     mysql_databases:
       - name: zabbix
+        encoding: utf8
+        collation: utf8_bin
     mysql_users:
       - name: zabbix
         password: zabbix
         priv: "zabbix.*:ALL"
-    zabbix_server: present
-    zabbix_web: present
 
   roles:
     - robertdebock.bootstrap
@@ -108,7 +113,7 @@ zabbix_web_server: "https://localhost/zabbix"
 zabbix_web_server_port: 10051
 zabbix_web_server_name: zabbix
 
-zabbix_web_username: admin
+zabbix_web_username: Admin
 zabbix_web_password: zabbix
 zabbix_validate_certs: no
 
@@ -131,11 +136,6 @@ zabbix_web_hosts:
       - Linux servers
     link_templates:
       - Template OS Linux
-
-
-
-# Get the list of required software from the mysql role.
-zabbix_server_requirements: "{{ mysql_packages }}"
 ```
 
 Requirements
@@ -177,16 +177,16 @@ This role has been tested against the following distributions and Ansible versio
 |alpine-latest|no|no|no*|
 |archlinux|no|no|no*|
 |centos-6|no|no|no*|
-|centos-latest|yes|yes|yes*|
-|debian-latest|yes|yes|yes*|
-|debian-stable|yes|yes|yes*|
-|debian-unstable*|yes|yes|yes*|
+|centos-latest|no|yes|yes*|
+|debian-latest|no|yes|yes*|
+|debian-stable|no|yes|yes*|
+|debian-unstable*|no|yes|yes*|
 |fedora-latest|no|no|no*|
 |fedora-rawhide*|no|no|no*|
 |opensuse-leap|no|no|no*|
-|ubuntu-devel*|yes|yes|yes*|
-|ubuntu-latest|yes|yes|yes*|
-|ubuntu-rolling|yes|yes|yes*|
+|ubuntu-devel*|no|yes|yes*|
+|ubuntu-latest|no|yes|yes*|
+|ubuntu-rolling|no|no|no*|
 
 A single star means the build may fail, it's marked as an experimental build.
 
@@ -197,7 +197,7 @@ Testing
 
 If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-zabbix/issues)
 
-To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
+To test this role locally please use [Molecule](https://github.com/ansible/molecule):
 ```
 pip install molecule
 molecule test
@@ -226,4 +226,4 @@ Apache-2.0
 Author Information
 ------------------
 
-[Robert de Bock](https://robertdebock.nl/) <robert@meinit.nl>
+Robert de Bock
