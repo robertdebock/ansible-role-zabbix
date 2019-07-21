@@ -35,23 +35,25 @@ The machine you are running this on, may need to be prepared.
   become: yes
   gather_facts: no
 
-  vars:
-    mysql_databases:
-      - name: zabbix
-        encoding: utf8
-        collation: utf8_bin
-    mysql_users:
-      - name: zabbix
-        password: zabbix
-        priv: "zabbix.*:ALL"
 
   roles:
-    - robertdebock.bootstrap
-    - robertdebock.epel
-    - robertdebock.python_pip
-    - robertdebock.php
-    - robertdebock.mysql
-    - robertdebock.httpd
+    - role: robertdebock.bootstrap
+    - role: robertdebock.epel
+    - role: robertdebock.python_pip
+    - role: robertdebock.remi
+      remi_enabled_repositories:
+        - php73
+    - role: robertdebock.php
+    - role: robertdebock.mysql
+      mysql_databases:
+        - name: zabbix
+          encoding: utf8
+          collation: utf8_bin
+      mysql_users:
+        - name: zabbix
+          password: zabbix
+          priv: "zabbix.*:ALL"
+    - role: robertdebock.httpd
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -155,6 +157,7 @@ The following roles can be installed to ensure all requirements are met, using `
 - robertdebock.php
 - robertdebock.python_pip
 - robertdebock.httpd
+- robertdebock.remi
 
 ```
 
