@@ -23,18 +23,16 @@ _zabbix_repository:
 zabbix_repository: "{{ _zabbix_repository[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_zabbix_repository[ansible_distribution] | default(_zabbix_repository['default'])) }}"
 
 _zabbix_web_server_package:
-  CentOS: zabbix-web-{{ zabbix_web_type | default('mysql') }}
   Debian: zabbix-frontend-php
-  Ubuntu: zabbix-frontend-php
+  RedHat: zabbix-web-{{ zabbix_web_type | default('mysql') }}
 
-zabbix_web_server_package: "{{ _zabbix_web_server_package[ansible_distribution] }}"
+zabbix_web_server_package: "{{ _zabbix_web_server_package[ansible_os_family] }}"
 
 _zabbix_documentation_directory:
-  CentOS: "/usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}"
   Debian: "/usr/share/doc/zabbix-server-{{ zabbix_server_type }}"
-  Ubuntu: "/usr/share/doc/zabbix-server-{{ zabbix_server_type }}"
+  RedHat: "/usr/share/doc/zabbix-server-{{ zabbix_server_type }}-{{ zabbix_server_mysql_version }}"
 
-zabbix_documentation_directory: "{{ _zabbix_documentation_directory[ansible_distribution] }}"
+zabbix_documentation_directory: "{{ _zabbix_documentation_directory[ansible_os_family] }}"
 
 zabbix_unarchive_command: gunzip {{ zabbix_documentation_directory }}/create.sql.gz
 zabbix_unarchive_creates: "{{ zabbix_documentation_directory }}/create.sql"
