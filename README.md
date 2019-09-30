@@ -6,6 +6,9 @@ zabbix
 
 Install and configure Zabbix on your system.
 
+<img src="https://img.shields.io/ansible/role/d/23321"/>
+<img src="https://img.shields.io/ansible/quality/23321"/>
+
 Example Playbook
 ----------------
 
@@ -161,6 +164,25 @@ The following roles can be installed to ensure all requirements are met, using `
 
 ```
 
+This role uses the following modules:
+```yaml
+---
+- apt
+- assert
+- command
+- copy
+- file
+- meta
+- mysql_db
+- package
+- pip
+- seboolean
+- service
+- template
+- zabbix_group
+- zabbix_host
+```
+
 Context
 -------
 
@@ -192,6 +214,7 @@ This role has been tested against the following distributions and Ansible versio
 |ubuntu-rolling|no|no|no*|
 
 A single star means the build may fail, it's marked as an experimental build.
+
 
 Included version(s)
 -------------------
