@@ -201,7 +201,7 @@ This role has been tested against the following distributions and Ansible versio
 |alpine-edge*|no|no|no*|
 |alpine-latest|no|no|no*|
 |archlinux|no|no|no*|
-|centos-6|no|no|no*|
+|centos-7|no|no|no*|
 |centos-latest|yes|yes|yes*|
 |debian-stable|no|no|no*|
 |debian-unstable*|no|no|no*|
