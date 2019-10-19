@@ -199,6 +199,7 @@ This role has been tested on these [container images](https://hub.docker.com/):
 |container|allow_failures|
 |---------|--------------|
 |docker-centos-systemd|no|
+|docker-ubuntu-systemd|yes|
 
 This role has been tested on these Ansible versions:
 
