@@ -11,15 +11,11 @@
   service:
     name: zabbix-agent
     state: restarted
-  when:
-    - ansible_virtualization_type != "docker"
 
 - name: restart zabbix server
   service:
     name: zabbix-server
     state: restarted
-  when:
-    - ansible_virtualization_type != "docker"
 
 - name: create selinux mod
   command: checkmodule -M -m -o /etc/zabbix/my-zabbixserver.mod /etc/zabbix/my-zabbixserver.te
@@ -38,12 +34,8 @@
     login_host: "{{ zabbix_server_database_host }}"
     login_user: "{{ zabbix_server_database_user }}"
     login_password: "{{ zabbix_server_database_pass }}"
-  when:
-    - ansible_virtualization_type != "docker"
 
 - name: restart httpd
   service:
     name: "{{ zabbix_httpd_service }}"
     state: restarted
-  when:
-    - ansible_virtualization_type != "docker"
