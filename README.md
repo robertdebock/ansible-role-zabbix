@@ -2,7 +2,7 @@ zabbix
 =========
 
 <img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="right"/>
-<a href="https://travis-ci.org/robertdebock/ansible-role-zabbix"> <img src="https://travis-ci.org/robertdebock/ansible-role-zabbix.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/23321"/> <img src="https://img.shields.io/ansible/quality/23321"/>
+<a href="https://travis-ci.org/robertdebock/ansible-role-zabbix"> <img src="https://travis-ci.org/robertdebock/ansible-role-zabbix.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/"/> <img src="https://img.shields.io/ansible/quality/"/>
 
 Install and configure Zabbix on your system.
 
@@ -177,8 +177,6 @@ This role has been tested on these [container images](https://hub.docker.com/):
 
 |container|tag|allow_failures|
 |---------|---|--------------|
-|amazonlinux|1|no|
-|amazonlinux|latest|no|
 |centos|7|no|
 |ubuntu|latest|no|
 
@@ -196,6 +194,7 @@ Some variarations of the build matrix do not work. These are the variations and 
 | variation                 | reason                 |
 |---------------------------|------------------------|
 | Alpine | Zabbix has [limited OS support](https://www.zabbix.com/download). |
+| amazonlinux | Zabbix has [limited OS support](https://www.zabbix.com/download). |
 | Archlinux | Zabbix has [limited OS support](https://www.zabbix.com/download). |
 | CentOS 8 | Zabbix has [limited OS support](https://www.zabbix.com/download). |
 | Debian | Zabbix has [limited OS support](https://www.zabbix.com/download). |
