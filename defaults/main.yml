@@ -2,7 +2,7 @@
 # defaults file for zabbix
 
 # The "zabbix_version_major" are two numerical values, sparated by a period.
-zabbix_version_major: 4.0
+zabbix_version_major: 4.4
 
 zabbix_version_minor: 1
 # The "zabbix_version" is the whole version of Zabbix.
