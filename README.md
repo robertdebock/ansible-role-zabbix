@@ -68,7 +68,7 @@ These variables are set in `defaults/main.yml`:
 # defaults file for zabbix
 
 # The "zabbix_version_major" are two numerical values, sparated by a period.
-zabbix_version_major: 4.0
+zabbix_version_major: 4.4
 
 zabbix_version_minor: 1
 # The "zabbix_version" is the whole version of Zabbix.
@@ -210,7 +210,6 @@ This role [refers to a version](https://github.com/robertdebock/ansible-role-zab
 - [Zabbix](https://www.zabbix.com/download).
 
 This version reference means a role may get outdated. Monthly tests occur to see if [bit-rot](https://en.wikipedia.org/wiki/Software_rot) occured. If you however find a problem, please create an issue, I'll get on it as soon as possible.
-
 Testing
 -------
 
